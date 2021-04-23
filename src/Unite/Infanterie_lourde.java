@@ -1,4 +1,4 @@
-package wargame;
+package Unite;
 
 
 public class Infanterie_lourde extends Unite {
