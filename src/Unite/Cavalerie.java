@@ -1,4 +1,4 @@
-package Unite;
+package unite;
 
 public class Cavalerie extends Unite {
 

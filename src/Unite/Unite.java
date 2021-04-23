@@ -1,6 +1,6 @@
-package Unite;
+package unite;
 
-import java.util.Random;
+// import java.util.Random;
 
 public abstract class Unite {
 	
