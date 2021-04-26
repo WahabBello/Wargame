@@ -6,10 +6,8 @@ import java.awt.Color;
 
 public class Foret extends Hexagone {
 
-	private static final long serialVersionUID = 1L;
-
-	public Foret(int x[], int y[], int x2[], int y2[]) {
-		super("Foret", 2, 40, Color.GREEN, x, y, x2, y2);
+	public Foret(int x[], int y[]) {
+		super("Foret", 2, 40, Color.GREEN, x, y);
 		// TODO Auto-generated constructor stub
 	}
 

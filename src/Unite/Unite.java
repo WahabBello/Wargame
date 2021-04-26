@@ -10,7 +10,7 @@ public abstract class Unite {
 	protected int Point_Deplacement;
 	protected int Vision;
 	protected int Point_Vie;
-	protected int Point_Déplacement_Restant;
+	protected int Point_Deplacement_Restant;
 	protected int Point_vie_restant;
 	protected int Degat;
 	protected int Degat_Brut;
@@ -28,8 +28,8 @@ public abstract class Unite {
 		//Faire deplacer une unité
 	public int Se_Deplace(String terrain, int point) {
 		System.out.println("Il vous faut " + point + " Points pour vous deplacer sur le terrain : " + terrain );
-		this.Point_Déplacement_Restant = this.Point_Deplacement - point;
-		return this.Point_Déplacement_Restant;	
+		this.Point_Deplacement_Restant = this.Point_Deplacement - point;
+		return this.Point_Deplacement_Restant;	
 	}
 	
 	//Recuperer le degat causé brut lors d'une attaque

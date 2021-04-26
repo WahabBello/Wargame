@@ -6,10 +6,8 @@ import java.awt.Color;
 
 public class Village extends Hexagone {
 
-	private static final long serialVersionUID = 1L;
-
-	public Village(int x[], int y[], int x2[], int y2[]) {
-		super("Village", 1, 40, Color.lightGray,  x, y, x2, y2);
+	public Village(int x[], int y[]) {
+		super("Village", 1, 40, Color.lightGray,  x, y);
 		// TODO Auto-generated constructor stub
 	}
 
