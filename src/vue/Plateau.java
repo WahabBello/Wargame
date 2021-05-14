@@ -1,6 +1,10 @@
 package vue;
 
 //import java.awt.EventQueue;
+//
+//import javax.swing.JFrame;
+
+//import java.awt.EventQueue;
 // import java.awt.Graphics;
 // import java.awt.Graphics2D;
 //import java.awt.Polygon;
@@ -82,26 +86,26 @@ public class Plateau{
 
   
 //    public static void main(String[] args) {
-		// EventQueue.invokeLater(new Runnable() {
-		// 	public void run() {
-		// 		try {
-		// 			Plateau frame = new Plateau();
-		// 			frame.setVisible(true);
-                    
-        //             Dessin_polygone carte = new Dessin_polygone(frame.tri_1, frame.tri_2, frame.row, frame.col, frame.tri_hexa);
-                    
-        //             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //             frame.add(carte);
-        //             frame.setSize(860, 600);
-                    
-		// 			// Hexagone carte = InitPolygone();
-		// 	        // frame.add(carte);
-		// 	        carte.addMouseListener(new MouseListen(carte));
-		// 		} catch (Exception e) {
-		// 			e.printStackTrace();
-		// 		}
-		// 	}
-		// });
+//		 EventQueue.invokeLater(new Runnable() {
+//		 	public void run() {
+//		 		try {
+//		 			Plateau frame = new Plateau();
+//		 			frame.setVisible(true);
+//                    
+//                     Dessin_polygone carte = new Dessin_polygone(frame.tri_1, frame.tri_2, frame.row, frame.col, frame.tri_hexa);
+//                    
+//                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//                     frame.add(carte);
+//                     frame.setSize(860, 600);
+//                    
+//		 			// Hexagone carte = InitPolygone();
+//		 	        // frame.add(carte);
+//		 	        carte.addMouseListener(new MouseListen(carte));
+//		 		} catch (Exception e) {
+//		 			e.printStackTrace();
+//		 		}
+//		 	}
+//		 });
 //    	new Plateau();
 //    }
 	 

@@ -3,13 +3,22 @@ package vue;
 import java.awt.Color;
 
 import java.awt.Polygon;
+import java.awt.TexturePaint;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.imageio.ImageIO;
+
+import unite.Unite;
 
 
 
 //Classe parent de chaque hexagone 
 
 public abstract class Hexagone {
-
 
 	private String type_hexa ;
 	private int point_deplacements;
@@ -18,7 +27,10 @@ public abstract class Hexagone {
 	private int[] x_coord;
 	private int[] y_coord;
 	private Polygon dessin_hexa;
-
+	public Unite unite;
+	public BufferedImage slate;
+	public TexturePaint slatetp;
+//	public slate = ImageIO.read(new File("slate.png"));
 
 	public Hexagone(String type_hexa, int point_deplacements, int bonus_defense, Color couleur, int x[], int y[]){
 		this.setType_hexa(type_hexa);
@@ -26,6 +38,7 @@ public abstract class Hexagone {
 		this.setBonus_defense(bonus_defense);
 		this.setCouleur(couleur);
 		this.setDessin_hexa(x,y);
+		this.loadImages();
 	}  
 
 	public int getBonus_defense() {
@@ -70,6 +83,20 @@ public abstract class Hexagone {
 		this.dessin_hexa = new Polygon(x, y, 6);
 	}
 
+    private void loadImages() {
+//	   BufferedImage img = ImageIO.read(new File("test.png"));
+//	   JLabel pic = new JLabel(new ImageIcon(img));
+        try {
+        	this.slate  = ImageIO.read(new File("../../images/Cavalerie.png"));
+//        	slatetp = ImageIO.read(new File("C:\\Users\\DELL\\Documents\\Isty\\POO\\Java\\workspace\\Wargame\\images\\Cavalerie.png"));
+            this.slatetp  = new TexturePaint(slate, this.getDessin_hexa().getBounds());
+        } catch (IOException ex) {
+
+            Logger.getLogger(Hexagone.class.getName()).log(
+                    Level.SEVERE, null, ex);
+        }
+    }
+    
 	public int[] getX_coord() {
 		return x_coord;
 	}

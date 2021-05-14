@@ -1,5 +1,16 @@
 package unite;
 
+import java.awt.TexturePaint;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import javax.imageio.ImageIO;
+
+import vue.Hexagone;
+
 // import java.util.Random;
 
 public abstract class Unite {
@@ -14,6 +25,8 @@ public abstract class Unite {
 	protected int Point_vie_restant;
 	protected int Degat;
 	protected int Degat_Brut;
+//	public BufferedImage slate;
+	public TexturePaint slatetp;
 	
 	
 	public Unite(String nom) {
@@ -66,4 +79,15 @@ public abstract class Unite {
 		System.out.println("Points de vie :  " + unite.Point_Vie);
 			
 	}
+	
+//    private void loadImages() {
+//         try {
+//         	BufferedImage slate  = ImageIO.read(new File("../../images/cavalerie.png"));
+//            this.slatetp  = new TexturePaint(slate, this.getDessin_hexa().getBounds());
+//         } catch (IOException ex) {
+//
+//             Logger.getLogger(Hexagone.class.getName()).log(
+//                     Level.SEVERE, null, ex);
+//         }
+//     }
 }
