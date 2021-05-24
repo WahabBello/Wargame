@@ -1,7 +1,7 @@
 /.metadata
-/bin/vue
-/bin/unite
-# /.bin
+# /bin/vue
+# /bin/unite
+/.bin
 # bin
 # README.md
 # /src

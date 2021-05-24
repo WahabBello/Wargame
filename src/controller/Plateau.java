@@ -1,16 +1,12 @@
-package vue;
+package controller;
 
-//import java.awt.EventQueue;
-//
-//import javax.swing.JFrame;
-
-//import java.awt.EventQueue;
-// import java.awt.Graphics;
-// import java.awt.Graphics2D;
-//import java.awt.Polygon;
-
-// import javax.swing.JComponent;
-//import javax.swing.JFrame;
+import vue.Colline;
+//import vue.Dessin_polygone;
+import vue.Foret;
+import vue.Hexagone;
+import vue.Montagne;
+import vue.Plaine;
+import vue.Village;
 
 // Classe principale du plateau de jeu � excuter pour l'affichage du graphisme 
 
@@ -20,11 +16,11 @@ public class Plateau{
 
 //	private static final long serialVersionUID = 1L;
 	
-	boolean etat;
 	int size;	
-    public Dessin_polygone carte;
+//    public Dessin_polygone carte;
 	public Hexagone[][] tri_1 = new Hexagone[9][9];
 	public Hexagone[][] tri_2 = new Hexagone[9][9];
+	public Hexagone[][] plateau_hexas = new Hexagone[9][18];
 	public int row = -1;
 	public int col = -1;
 	public boolean tri_hexa;
@@ -82,6 +78,39 @@ public class Plateau{
                 y_init_2[j_x] += 60;
             }
         }
+        
+
+//        for (int x = 0; x < 9; x++) {
+//            for (int y = 0; y < 9; y++) {
+//                if (y % 2 == 0) {
+//                    this.plateau_hexas[x][y] = this.tri_1[x][y];
+//                    this.plateau_hexas[x][y].i_hexa = x;
+//                    this.plateau_hexas[x][y].j_hexa = y;
+//                }else {
+//                    this.plateau_hexas[x][y] = this.tri_2[x][y];
+//                    this.plateau_hexas[x][y].i_hexa = x;
+//                    this.plateau_hexas[x][y].j_hexa = y;
+//                } 
+//            }
+//        }
+        
+//        for (int x = 0; x < 9; x++) {
+//            for (int y = 9; y < 18; y++) {
+//            	int j = 0;
+//                if (y % 2 == 0) {
+//                    this.plateau_hexas[x][y] = this.tri_1[x][j];
+//                    this.plateau_hexas[x][y].i_hexa = x;
+//                    this.plateau_hexas[x][y].j_hexa = y;
+//                }else {
+//                    this.plateau_hexas[x][y] = this.tri_2[x][j];
+//                    this.plateau_hexas[x][y].i_hexa = x;
+//                    this.plateau_hexas[x][y].j_hexa = y;
+//                }
+//                j++;
+//            }
+//        }
+        
+        
     }
 
   
@@ -109,10 +138,5 @@ public class Plateau{
 //    	new Plateau();
 //    }
 	 
-	public boolean isEtat() {
-		return etat;
-	}
-	public void setEtat(boolean etat) {
-		this.etat = etat;
-	}
+
 }

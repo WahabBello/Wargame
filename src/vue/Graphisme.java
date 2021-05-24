@@ -5,11 +5,16 @@ package vue;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
+//import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controller.MouseListen;
+import controller.Plateau;
+
+//import controller.Dessin_polygone;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -21,10 +26,12 @@ import javax.swing.SwingUtilities;
 import javax.swing.JLabel;
 //import javax.swing.JToggleButton;
 import javax.swing.JPopupMenu;
+//import javax.swing.JScrollPane;
+
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+//import java.awt.event.MouseListener;
 
 import javax.swing.JMenuItem;
 //import javax.swing.JMenu;
@@ -33,6 +40,7 @@ import java.awt.Rectangle;
 import java.awt.Canvas;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
+import java.awt.Font;
 
 
 
@@ -43,90 +51,12 @@ public class Graphisme extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	public Hexagone hexa_selected;
-	
-//	public MouseListen data_event;
-//	private JTextField textField;
-	
-
-	/**
-	 * Execution de l' application pour afficher la graphisme
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Plateau plateau = new Plateau();
-					Dessin_polygone dessin_poly = new Dessin_polygone(plateau.tri_1, plateau.tri_2, plateau.row, plateau.col, plateau.tri_hexa);
-
-
-					Graphisme frame = new Graphisme();
-					
-					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//					frame.getContentPane().add(contenant, BorderLayout.CENTER);
-					frame.getContentPane().add(dessin_poly, BorderLayout.CENTER);
-					frame.getContentPane().add(dessin_poly, BorderLayout.CENTER);
-					frame.setSize(1100, 700);
-					frame.setLocationRelativeTo(null);
-					
-					MouseListen data_event = new MouseListen(dessin_poly);
-					dessin_poly.addMouseListener(data_event);
-					
-					dessin_poly.addMouseListener(new MouseListener() {
-
-						@Override
-						public void mouseClicked(MouseEvent e) {
-							// TODO Auto-generated method stub
-//							this.getHexa
-							System.out.println(data_event.getHexa_selected().getType_hexa());
-							
-						}
-
-						@Override
-						public void mousePressed(MouseEvent e) {
-							// TODO Auto-generated method stub
-							
-						}
-
-						@Override
-						public void mouseReleased(MouseEvent e) {
-							// TODO Auto-generated method stub
-							
-						}
-
-						@Override
-						public void mouseEntered(MouseEvent e) {
-							// TODO Auto-generated method stub
-							
-						}
-
-						@Override
-						public void mouseExited(MouseEvent e) {
-							// TODO Auto-generated method stub
-							
-						}
-						
-					});
-					
-					JPopupMenu popupMenu_1 = new JPopupMenu();
-					addPopup(dessin_poly, popupMenu_1);
-					
-					JMenuItem mntmNewMenuItem = new JMenuItem("Attaquer");
-					mntmNewMenuItem.setActionCommand("");
-					popupMenu_1.add(mntmNewMenuItem);
-					
-					JMenuItem mntmNewMenuItem_1 = new JMenuItem("Deplacer");
-					mntmNewMenuItem_1.setActionCommand("");
-					popupMenu_1.add(mntmNewMenuItem_1);
-					
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-		
-	}
-
+	JLabel label_terrain;
+	JLabel label_terrain_bd;	
+	JLabel label_terrain_pd;
+	MouseListen data_event;
+	Plateau plateau;
+	Dessin_polygone dessin_poly;
 	/**
 	 * Creation des differents onglets dans la fenetre
 	 */
@@ -140,11 +70,41 @@ public class Graphisme extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
+		panel_plateau_jeu(contentPane);
+		
 		top_panel(contentPane);
 		right_panel(contentPane);
 		
 	}
 
+	public void panel_plateau_jeu(JPanel contentPane) {
+		plateau = new Plateau();
+		dessin_poly = new Dessin_polygone(plateau.tri_1, plateau.tri_2, plateau.row, plateau.col, plateau.tri_hexa);
+		contentPane.add(dessin_poly, BorderLayout.CENTER);
+//		data_event = new MouseListen(dessin_poly);
+//		dessin_poly.addMouseListener(data_event);
+			
+		dessin_poly.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				selection_hexa(e);
+				update_infos();
+				// System.out.println(data_event.getHexa_selected().getType_hexa());
+
+			}			
+		});
+		
+		JPopupMenu popupMenu_1 = new JPopupMenu();
+		addPopup(dessin_poly, popupMenu_1);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Attaquer");
+		mntmNewMenuItem.setActionCommand("");
+		popupMenu_1.add(mntmNewMenuItem);
+		
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Deplacer");
+		mntmNewMenuItem_1.setActionCommand("");
+		popupMenu_1.add(mntmNewMenuItem_1);
+	} 
+	
 	public void top_panel (JPanel contentPane) {
 		Panel panel_1 = new Panel();
 		contentPane.add(panel_1, BorderLayout.NORTH);
@@ -173,17 +133,18 @@ public class Graphisme extends JFrame {
 	
 	public void right_panel(JPanel contentPane) {
 		Panel panel = new Panel();
+		panel.setPreferredSize(new Dimension(150, 10));
+		panel.setSize(new Dimension(10, 10));
 		panel.setBounds(new Rectangle(15, 15, 10, 20));
 		panel.setMinimumSize(new Dimension(8, 8));
 		contentPane.add(panel, BorderLayout.EAST);
-		panel.setLayout(new BorderLayout(0, 0));
+		panel.setLayout(new BorderLayout(10, 5));
 //			panel.setBounds(40,50,150,150);
 		
 		JButton btnNewButton = new JButton("Passer le tour");
 		panel.add(btnNewButton, BorderLayout.SOUTH);
 		
 		Panel panel_2 = new Panel();
-		panel_2.setPreferredSize(new Dimension(5, 5));
 		panel_2.setMinimumSize(new Dimension(6, 6));
 		panel_2.setMaximumSize(new Dimension(0, 0));
 		panel.add(panel_2, BorderLayout.CENTER);
@@ -194,16 +155,20 @@ public class Graphisme extends JFrame {
 		canvas.setBounds(new Rectangle(0, 0, 60, 60));
 		panel_2.add(canvas);
 		
-		JLabel lblNewLabel_3 = new JLabel("Unit\u00E9 : xxxx");
+		JLabel lblNewLabel_3 = new JLabel("Unit\u00E9 : Cavalerie");
+		lblNewLabel_3.setFont(new Font("SansSerif", Font.BOLD, 14));
 		panel_2.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel = new JLabel("P. A : 100%");
+		lblNewLabel.setFont(new Font("SansSerif", Font.BOLD, 14));
 		panel_2.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("P. D : 100%");
+		lblNewLabel_1.setFont(new Font("SansSerif", Font.BOLD, 14));
 		panel_2.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("P. Dep : 100%");
+		lblNewLabel_2.setFont(new Font("SansSerif", Font.BOLD, 14));
 		panel_2.add(lblNewLabel_2);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(20);
@@ -211,17 +176,20 @@ public class Graphisme extends JFrame {
 		horizontalStrut.setPreferredSize(new Dimension(50, 11));
 		panel_2.add(horizontalStrut);
 		
-		JLabel lblNewLabel_3_1_1_1_1 = new JLabel("Terrain: xxxx");
-		panel_2.add(lblNewLabel_3_1_1_1_1);
+		label_terrain = new JLabel("Terrain: Foret");
+		label_terrain.setFont(new Font("SansSerif", Font.BOLD, 14));
+		panel_2.add(label_terrain);
 		
-		JLabel lblNewLabel_3_1 = new JLabel("Bonus Def. : 100%");
-		panel_2.add(lblNewLabel_3_1);
+		label_terrain_bd = new JLabel("Bonus Def. : 100%");
+		label_terrain_bd.setFont(new Font("SansSerif", Font.BOLD, 14));
+		panel_2.add(label_terrain_bd);
 		
-		JLabel lblNewLabel_3_1_1 = new JLabel("Point Depl. : 7");
-		panel_2.add(lblNewLabel_3_1_1);
+		label_terrain_pd = new JLabel("Point Depl. : 7");
+		label_terrain_pd.setFont(new Font("SansSerif", Font.BOLD, 14));
+		panel_2.add(label_terrain_pd);
 	}
 	
-	private static void addPopup(Component component, final JPopupMenu popup) {
+	private void addPopup(Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				if (e.isPopupTrigger()) {
@@ -239,5 +207,42 @@ public class Graphisme extends JFrame {
 			     }
 			}
 		});
+	}
+	
+	public void selection_hexa(MouseEvent e) {
+        int x = e.getX();
+        int y = e.getY();
+        plateau.row = plateau.col = -1;
+        
+        for (int i = 0; i < plateau.tri_1.length; i++)
+            for (int j = 0; j <  plateau.tri_1.length; j++)
+                if (plateau.tri_1[i][j].getDessin_hexa().contains(x, y) || plateau.tri_2[i][j].getDessin_hexa().contains(x, y)) {
+                	if ( plateau.tri_2[i][j].getDessin_hexa().contains(x, y)) {
+                		plateau.row = i;
+                		plateau.col = j;
+                		plateau.tri_hexa= false;
+						this.hexa_selected = plateau.tri_2[i][j];
+                		// this.setHexa_selected(plateau.tri_2[i][j]);
+                	}else {
+                		plateau.row = i;
+                		plateau.col = j;
+                		plateau.tri_hexa= true;
+						this.hexa_selected = plateau.tri_1[i][j];
+                		// this.setHexa_selected(plateau.tri_1[i][j]);
+                	}
+                	
+//					System.out.println(i+"<-i et j->"+j);
+//					System.out.println("x et y= " + plateau.tri_2[i][j].getDessin_hexa().xpoints+ "et" + plateau.tri_2[i][j].getDessin_hexa().ypoints);
+//					System.out.println("coord = " + Arrays.toString(plateau.tri_2[i][j].getY_coord()));
+                } 
+//				System.out.println(this.getHexa_selected().i_hexa+"<-i et j->"+this.getHexa_selected().j_hexa);  
+        dessin_poly.repaint();
+//		System.out.println("------------------");
+	}
+	public void update_infos() {
+		label_terrain.setText("Terrain: " + this.hexa_selected.getType_hexa());
+		label_terrain_bd.setText("Bonus Def. : "+ this.hexa_selected.getBonus_defense());
+//		panel_2.add(label_terrain_bd); Bonus Def. : 100%
+		label_terrain_pd.setText("Point Depl. : " + this.hexa_selected.getPoint_deplacements());
 	}
 }
