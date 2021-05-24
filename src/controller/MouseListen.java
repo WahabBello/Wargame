@@ -59,7 +59,7 @@ public class MouseListen extends MouseAdapter {
 //        	}
 //        }
 //        System.out.println(this.getHexa_selected().i_hexa+"<-i et j->"+this.getHexa_selected().j_hexa);  
-        this.plateau.repaint();
+//        this.plateau.repaint();
 //		System.out.println("------------------");
 
     }

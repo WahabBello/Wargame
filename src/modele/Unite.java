@@ -1,4 +1,4 @@
-package wargame_Unite;
+package modele;
 
 
 public abstract class Unite {

@@ -1,4 +1,4 @@
-package wargame_Unite;
+package modele;
 
 import java.awt.Image;
 
