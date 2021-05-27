@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import controller.MouseListen;
+//import controller.MouseListen;
 import controller.Plateau;
 
 //import controller.Dessin_polygone;
@@ -79,7 +79,7 @@ public class Graphisme extends JFrame {
 
 	public void panel_plateau_jeu(JPanel contentPane) {
 		plateau = new Plateau();
-		dessin_poly = new Dessin_polygone(plateau.tri_1, plateau.tri_2, plateau.row, plateau.col, plateau.tri_hexa);
+		dessin_poly = new Dessin_polygone(plateau.plateau_hexas, plateau.row, plateau.col, plateau.tri_hexa);
 		contentPane.add(dessin_poly, BorderLayout.CENTER);
 //		data_event = new MouseListen(dessin_poly);
 //		dessin_poly.addMouseListener(data_event);
@@ -214,27 +214,22 @@ public class Graphisme extends JFrame {
         int y = e.getY();
         plateau.row = plateau.col = -1;
         
-        for (int i = 0; i < plateau.tri_1.length; i++)
-            for (int j = 0; j <  plateau.tri_1.length; j++)
-                if (plateau.tri_1[i][j].getDessin_hexa().contains(x, y) || plateau.tri_2[i][j].getDessin_hexa().contains(x, y)) {
-                	if ( plateau.tri_2[i][j].getDessin_hexa().contains(x, y)) {
-                		plateau.row = i;
-                		plateau.col = j;
-                		plateau.tri_hexa= false;
-						this.hexa_selected = plateau.tri_2[i][j];
-                		// this.setHexa_selected(plateau.tri_2[i][j]);
-                	}else {
+        for (int i = 0; i < plateau.plateau_hexas.length; i++)
+            for (int j = 0; j <  plateau.plateau_hexas.length; j++)
+                // if (plateau.plateau_hexas[i][j].getDessin_hexa().contains(x, y) || plateau.plateau_hexas[i][j].getDessin_hexa().contains(x, y)) {
+                	if ( plateau.plateau_hexas[i][j].getDessin_hexa().contains(x, y)) {
                 		plateau.row = i;
                 		plateau.col = j;
                 		plateau.tri_hexa= true;
-						this.hexa_selected = plateau.tri_1[i][j];
-                		// this.setHexa_selected(plateau.tri_1[i][j]);
+						this.hexa_selected = plateau.plateau_hexas[i][j];
+						System.out.println(i+"<-i et j->"+j);
                 	}
+
                 	
-//					System.out.println(i+"<-i et j->"+j);
-//					System.out.println("x et y= " + plateau.tri_2[i][j].getDessin_hexa().xpoints+ "et" + plateau.tri_2[i][j].getDessin_hexa().ypoints);
-//					System.out.println("coord = " + Arrays.toString(plateau.tri_2[i][j].getY_coord()));
-                } 
+					
+//					System.out.println("x et y= " + plateau.plateau_hexas[i][j].getDessin_hexa().xpoints+ "et" + plateau.plateau_hexas[i][j].getDessin_hexa().ypoints);
+//					System.out.println("coord = " + Arrays.toString(plateau.plateau_hexas[i][j].getY_coord()));
+
 //				System.out.println(this.getHexa_selected().i_hexa+"<-i et j->"+this.getHexa_selected().j_hexa);  
         dessin_poly.repaint();
 //		System.out.println("------------------");

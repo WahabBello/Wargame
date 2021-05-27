@@ -1,6 +1,6 @@
 package controller;
 
-import java.awt.BorderLayout;
+//import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -28,9 +28,6 @@ public class Main_wargame {
 					Graphisme frame = new Graphisme();
 					
 					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//					frame.getContentPane().add(contenant, BorderLayout.CENTER);
-//					frame.getContentPane().add(dessin_poly, BorderLayout.CENTER);
-//					frame.getContentPane().add(dessin_poly, BorderLayout.CENTER);
 					frame.setSize(1000, 600);
 					frame.setLocationRelativeTo(null);
 					

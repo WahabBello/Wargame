@@ -12,12 +12,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
+//import javax.swing.ImageIcon;
 //import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 //import javax.swing.JLabel;
 //import javax.swing.JPanel;
-import javax.swing.JLabel;
+//import javax.swing.JLabel;
 
 // Initialisation des tableaux de polygone avec leurs differents couleurs
 
@@ -26,19 +26,19 @@ class Dessin_polygone extends JComponent {
 /**
 	 * 
 	 */
-//	private static final long serialVersionUID = 9218121229296185852L;
+	private static final long serialVersionUID = 9218121229296185852L;
 //    private static final long serialVersionUID = 1L;
-    public Hexagone[][] tri_1;
-    public Hexagone[][] tri_2;
+    // public Hexagone[][] plateau_hexas;
+    // public Hexagone[][] tri_2;
     public Hexagone[][] plateau_hexas;
     public int row;
     public int col;
     public boolean tri_hexa;
     public TexturePaint slate;
     
-    public Dessin_polygone(Hexagone[][] tab_1, Hexagone[][] tab_2, int row, int col, boolean tri_hexa){
-        this.tri_1 = tab_1;
-        this.tri_2 = tab_2;
+    public Dessin_polygone(Hexagone[][] tab, int row, int col, boolean tri_hexa){
+        this.plateau_hexas = tab;
+        // this.tri_2 = tab_2;
 //        this.plateau_hexas = plateau;
         this.row = row;
         this.col = col;
@@ -55,24 +55,23 @@ class Dessin_polygone extends JComponent {
         g2d.setPaint(this.slate);
         g2d.fillRect(0, 0, 1200, 600);
         
-         for (int x = 0; x < this.tri_1.length; x++) {
-             for (int y = 0; y <  this.tri_1.length; y++) {
-                 g2d.setColor(this.tri_1[x][y].getCouleur());
-                 g2d.drawPolygon(this.tri_1[x][y].getDessin_hexa());
+         for (int x = 0; x < this.plateau_hexas.length; x++) {
+             for (int y = 0; y <  this.plateau_hexas.length; y++) {
+                 g2d.setColor(this.plateau_hexas[x][y].getCouleur());
+                 g2d.drawPolygon(this.plateau_hexas[x][y].getDessin_hexa());                 
                  
-                 
-                 g2d.setColor(this.tri_2[x][y].getCouleur());
-                 g2d.drawPolygon(this.tri_2[x][y].getDessin_hexa());
+                //  g2d.setColor(this.tri_2[x][y].getCouleur());
+                //  g2d.drawPolygon(this.tri_2[x][y].getDessin_hexa());
 
                  if (x == 1 && y== 3) {
-                     g2d.setPaint(this.tri_1[x][y].slatetp);
-                     g2d.fill(this.tri_1[x][y].getDessin_hexa().getBounds());;               	 
+                     g2d.setPaint(this.plateau_hexas[x][y].slatetp);
+                     g2d.fill(this.plateau_hexas[x][y].getDessin_hexa().getBounds());;               	 
                  }else if (x == 2 && y == 6) {
-                     g2d.setPaint(this.tri_1[x][y].slatetp);
-                     g2d.fill(this.tri_1[x][y].getDessin_hexa().getBounds());; 
+                     g2d.setPaint(this.plateau_hexas[x][y].slatetp);
+                     g2d.fill(this.plateau_hexas[x][y].getDessin_hexa().getBounds());; 
                  }else if (x == 6 && y == 8) {
-                     g2d.setPaint(this.tri_1[x][y].slatetp);
-                     g2d.fill(this.tri_1[x][y].getDessin_hexa().getBounds());; 
+                     g2d.setPaint(this.plateau_hexas[x][y].slatetp);
+                     g2d.fill(this.plateau_hexas[x][y].getDessin_hexa().getBounds());; 
                  }
                  
 
@@ -80,14 +79,15 @@ class Dessin_polygone extends JComponent {
              if (this.row != -1)
              {          	
                 if (this.tri_hexa) {
-                //    g2d.setColor(this.tri_1[this.row][this.col].getCouleur());
+                //    g2d.setColor(this.plateau_hexas[this.row][this.col].getCouleur());
                    g2d.setColor(Color.WHITE);
-                   g2d.fillPolygon(this.tri_1[this.row][this.col].getDessin_hexa());            		
-                }else {
-                //    g2d.setColor(this.tri_2[this.row][this.col].getCouleur());
-                   g2d.setColor(Color.WHITE);
-                   g2d.fillPolygon(this.tri_2[this.row][this.col].getDessin_hexa());
+                   g2d.fillPolygon(this.plateau_hexas[this.row][this.col].getDessin_hexa());            		
                 }
+                // else {
+                // //    g2d.setColor(this.tri_2[this.row][this.col].getCouleur());
+                //    g2d.setColor(Color.WHITE);
+                //    g2d.fillPolygon(this.tri_2[this.row][this.col].getDessin_hexa());
+                // }
              }
          }
     }

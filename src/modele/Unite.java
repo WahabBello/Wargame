@@ -10,7 +10,7 @@ public abstract class Unite {
 	protected int Vision;
 	protected int Point_Vie;
 	
-	protected int Point_Déplacement_Restant;
+	protected int Point_Deplacement_Restant;
 	protected int Point_vie_restant;
 	protected int Degat;
 	protected int Degat_Brut;
@@ -40,10 +40,10 @@ public abstract class Unite {
 			u.Y = y_depart + y_final;
 			
 			// Point restant après déplacement
-			u.Point_Déplacement_Restant = u.Point_Deplacement - t.getPoint_Deplacement();
+			u.Point_Deplacement_Restant = u.Point_Deplacement - t.getPoint_Deplacement();
 		}
 		
-		return u.Point_Déplacement_Restant;	
+		return u.Point_Deplacement_Restant;
 	}
 	
 	// Verifie si une case contient déja une unité ou pas

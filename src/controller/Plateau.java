@@ -18,9 +18,9 @@ public class Plateau{
 	
 	int size;	
 //    public Dessin_polygone carte;
-	public Hexagone[][] tri_1 = new Hexagone[9][9];
-	public Hexagone[][] tri_2 = new Hexagone[9][9];
-	public Hexagone[][] plateau_hexas = new Hexagone[9][18];
+	public Hexagone[][] plateau_hexas = new Hexagone[24][24];
+	// public Hexagone[][] tri_2 = new Hexagone[9][9];
+	// public Hexagone[][] plateau_hexas = new Hexagone[9][18];
 	public int row = -1;
 	public int col = -1;
 	public boolean tri_hexa;
@@ -36,29 +36,38 @@ public class Plateau{
     // Initialisation du tableau de hexagone avec leurs differents types d'hexagone et coordonées
     
     private void initPolygone() {
-        for (int x = 0; x < this.tri_1.length; x++) {
-            for (int y = 0; y <  this.tri_1.length; y++) {
+        for (int x = 0; x < this.plateau_hexas.length; x++) {
+            for (int y = 0; y <  this.plateau_hexas.length; y++) {
 
-                if (x == 2 && (y == 6 || y == 5) ) {
-            		this.tri_1[x][y] = new Colline(x_init, y_init);
-            		this.tri_2[x][y] =  new Colline(x_init_2, y_init_2);
-            	}else if (x == 4 &&(y == 2 || y == 3) ) {
-            		this.tri_1[x][y] = new Village(x_init, y_init);
-            		this.tri_2[x][y] =  new Village(x_init_2, y_init_2);
-            	}else if (x == 6 && (y == 7 || y == 8)) {
-            		this.tri_1[x][y] = new Montagne(x_init, y_init);
-            		this.tri_2[x][y] =  new Montagne(x_init_2, y_init_2);
-            	}else if ((x == 7 || x == 8) && (y == 4 || y == 5)) {
-            		this.tri_1[x][y] = new Plaine(x_init, y_init);
-            		this.tri_2[x][y] =  new Plaine(x_init_2, y_init_2);
-            	}else {
-            		this.tri_1[x][y] = new Foret(x_init, y_init);
-            		this.tri_2[x][y] =  new Foret(x_init_2, y_init_2);
-            	}
+                if(y%2 == 0)
+				{
+					plateau_hexas[x][y] = new Colline(x_init,y_init);
+				}
+				else
+				{
+					plateau_hexas[x][y] = new Montagne(x_init, y_init_2);
+				}
+
+                // if (x == 2 && (y == 6 || y == 5) ) {
+            	// 	this.tri_1[x][y] = new Colline(x_init, y_init);
+            	// 	this.tri_2[x][y] =  new Colline(x_init_2, y_init_2);
+            	// }else if (x == 4 &&(y == 2 || y == 3) ) {
+            	// 	this.tri_1[x][y] = new Village(x_init, y_init);
+            	// 	this.tri_2[x][y] =  new Village(x_init_2, y_init_2);
+            	// }else if (x == 6 && (y == 7 || y == 8)) {
+            	// 	this.tri_1[x][y] = new Montagne(x_init, y_init);
+            	// 	this.tri_2[x][y] =  new Montagne(x_init_2, y_init_2);
+            	// }else if ((x == 7 || x == 8) && (y == 4 || y == 5)) {
+            	// 	this.tri_1[x][y] = new Plaine(x_init, y_init);
+            	// 	this.tri_2[x][y] =  new Plaine(x_init_2, y_init_2);
+            	// }else {
+            	// 	this.tri_1[x][y] = new Foret(x_init, y_init);
+            	// 	this.tri_2[x][y] =  new Foret(x_init_2, y_init_2);
+            	// }
 
                 for (int j = 0; j < x_init.length; j++) {
-                    x_init[j] += 100;
-                    x_init_2[j] += 100;
+                    x_init[j] += 50;
+                    // x_init_2[j] += 100;
                 }
             }
             x_init[0] = 0;
