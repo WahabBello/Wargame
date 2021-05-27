@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 
-import unite.Unite;
+import modele.Unite;
 
 
 

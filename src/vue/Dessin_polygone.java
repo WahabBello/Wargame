@@ -39,7 +39,7 @@ class Dessin_polygone extends JComponent {
     public Dessin_polygone(Hexagone[][] tab_1, Hexagone[][] tab_2, int row, int col, boolean tri_hexa){
         this.tri_1 = tab_1;
         this.tri_2 = tab_2;
-//        this.plateau_hexas = plateau;
+//     this.plateau_hexas = plateau;
         this.row = row;
         this.col = col;
         this.tri_hexa = tri_hexa;
@@ -73,8 +73,7 @@ class Dessin_polygone extends JComponent {
                  }else if (x == 6 && y == 8) {
                      g2d.setPaint(this.tri_1[x][y].slatetp);
                      g2d.fill(this.tri_1[x][y].getDessin_hexa().getBounds());; 
-                 }
-                 
+                 }   
 
              }
              if (this.row != -1)
