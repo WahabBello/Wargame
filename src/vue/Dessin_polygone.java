@@ -21,7 +21,7 @@ import javax.swing.JComponent;
 
 // Initialisation des tableaux de polygone avec leurs differents couleurs
 
-class Dessin_polygone extends JComponent {
+public class Dessin_polygone extends JComponent {
 
 /**
 	 * 
@@ -53,11 +53,18 @@ class Dessin_polygone extends JComponent {
         
 
         g2d.setPaint(this.slate);
-        g2d.fillRect(0, 0, 1200, 600);
+        g2d.fillRect(0, 0, 1250, 700);
         
+        if (this.row != -1) {          	
+            if (this.tri_hexa) {
+               g2d.setColor(Color.WHITE);
+               g2d.fillPolygon(this.plateau_hexas[this.row][this.col].getDessin_hexa());            		
+            }
+
+         }
          for (int x = 0; x < this.plateau_hexas.length; x++) {
              for (int y = 0; y <  this.plateau_hexas.length; y++) {
-                 g2d.setColor(this.plateau_hexas[x][y].getCouleur());
+                 g2d.setColor(Color.WHITE);
                  g2d.drawPolygon(this.plateau_hexas[x][y].getDessin_hexa());                 
                  
                 //  g2d.setColor(this.tri_2[x][y].getCouleur());
@@ -76,28 +83,17 @@ class Dessin_polygone extends JComponent {
                  
 
              }
-             if (this.row != -1)
-             {          	
-                if (this.tri_hexa) {
-                //    g2d.setColor(this.plateau_hexas[this.row][this.col].getCouleur());
-                   g2d.setColor(Color.WHITE);
-                   g2d.fillPolygon(this.plateau_hexas[this.row][this.col].getDessin_hexa());            		
-                }
-                // else {
-                // //    g2d.setColor(this.tri_2[this.row][this.col].getCouleur());
-                //    g2d.setColor(Color.WHITE);
-                //    g2d.fillPolygon(this.tri_2[this.row][this.col].getDessin_hexa());
-                // }
-             }
+
          }
     }
     
+//    Image affiché derriere des polygones
     private void loadImages() {
          try {        	 
 //        	BufferedImage slate  = ImageIO.read(new File("../../images/plateau.png"));
         	BufferedImage slate  = ImageIO.read(new File("C:\\\\Users\\\\DELL\\\\Documents\\\\Isty\\\\POO\\\\Java\\\\workspace\\\\Wargame\\\\images\\\\plateau.png"));
     
-            this.slate  = new TexturePaint(slate, new Rectangle(0, 0, 1300, 700));
+            this.slate  = new TexturePaint(slate, new Rectangle(0, 0, 1250, 700));
          } catch (IOException ex) {
 
              Logger.getLogger(Hexagone.class.getName()).log(
