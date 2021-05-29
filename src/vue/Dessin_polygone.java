@@ -36,10 +36,17 @@ public class Dessin_polygone extends JComponent {
     public boolean tri_hexa;
     public TexturePaint slate;
     
+<<<<<<< HEAD
+    public Dessin_polygone(Hexagone[][] tab_1, Hexagone[][] tab_2, int row, int col, boolean tri_hexa){
+        this.tri_1 = tab_1;
+        this.tri_2 = tab_2;
+//     this.plateau_hexas = plateau;
+=======
     public Dessin_polygone(Hexagone[][] tab, int row, int col, boolean tri_hexa){
         this.plateau_hexas = tab;
         // this.tri_2 = tab_2;
 //        this.plateau_hexas = plateau;
+>>>>>>> fb713b7692b24de2578133d30ee14a789d5197e8
         this.row = row;
         this.col = col;
         this.tri_hexa = tri_hexa;
@@ -77,10 +84,16 @@ public class Dessin_polygone extends JComponent {
                      g2d.setPaint(this.plateau_hexas[x][y].slatetp);
                      g2d.fill(this.plateau_hexas[x][y].getDessin_hexa().getBounds());; 
                  }else if (x == 6 && y == 8) {
+<<<<<<< HEAD
+                     g2d.setPaint(this.tri_1[x][y].slatetp);
+                     g2d.fill(this.tri_1[x][y].getDessin_hexa().getBounds());; 
+                 }   
+=======
                      g2d.setPaint(this.plateau_hexas[x][y].slatetp);
                      g2d.fill(this.plateau_hexas[x][y].getDessin_hexa().getBounds());; 
                  }
                  
+>>>>>>> fb713b7692b24de2578133d30ee14a789d5197e8
 
              }
 

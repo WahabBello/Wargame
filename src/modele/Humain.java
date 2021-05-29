@@ -1,0 +1,3 @@
+class Humain extends Player {
+
+}
