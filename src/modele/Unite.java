@@ -1,5 +1,6 @@
 package modele;
 
+import java.awt.TexturePaint;
 
 public abstract class Unite {
 	
@@ -9,12 +10,12 @@ public abstract class Unite {
 	protected int Point_Deplacement;
 	protected int Vision;
 	protected int Point_Vie;
-	
 	protected int Point_Deplacement_Restant;
 	protected int Point_vie_restant;
 	protected int Degat;
 	protected int Degat_Brut;
-	
+
+	protected TexturePaint image_unite;
 	protected int X;
 	protected int Y;
 	
@@ -30,9 +31,8 @@ public abstract class Unite {
 		
 		//Faire deplacer une unité
 	public int Se_Deplace(Terrains t, Unite u, int x_depart, int y_depart, int x_final, int y_final) {
-		/*
-		 distance entre le x final et le x de départ sera comparé à la vision d'une unité
-		 */
+		
+		/* distance entre le x final et le x de départ sera comparé à la vision d'une unité */
 		int Distance;
 		Distance = x_final - x_depart;
 		if(Distance <= u.Vision) {

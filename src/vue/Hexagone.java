@@ -32,9 +32,6 @@ public abstract class Hexagone {
 	public int i_hexa;
 	public int j_hexa;
 	private int etat;
-//	public BufferedImage slate;
-	public TexturePaint slatetp;
-//	public slate = ImageIO.read(new File("slate.png"));
 
 	public Hexagone(String type_hexa, int point_deplacements, int bonus_defense, Color couleur, int x[], int y[]){
 		this.setType_hexa(type_hexa);
@@ -42,7 +39,7 @@ public abstract class Hexagone {
 		this.setBonus_defense(bonus_defense);
 		this.setCouleur(couleur);
 		this.setDessin_hexa(x,y);
-		this.loadImages();
+//		this.loadImages();
 		this.setEtat(0);
 	}  
 
@@ -87,22 +84,6 @@ public abstract class Hexagone {
 		this.setY_coord(y);
 		this.dessin_hexa = new Polygon(x, y, 6);
 	}
-
-    private void loadImages() {
-//	   BufferedImage img = ImageIO.read(new File("test.png"));
-//	   JLabel pic = new JLabel(new ImageIcon(img));
-        try {
-//        	url = getClass().getResource("../../images/Cavalerie.png");
-//        	BufferedImage slate  = ImageIO.read(new File(url));
-        	BufferedImage slate  = ImageIO.read(new File("C:\\\\Users\\\\DELL\\\\Documents\\\\Isty\\\\POO\\\\Java\\\\workspace\\\\Wargame\\\\images\\\\Cavalerie.png"));
-//        	this.slate = ImageIO.read(new File("C:\\Users\\DELL\\Documents\\Isty\\POO\\Java\\workspace\\Wargame\\images\\Cavalerie.png"));
-            this.slatetp  = new TexturePaint(slate, this.getDessin_hexa().getBounds());
-        } catch (IOException ex) {
-
-            Logger.getLogger(Hexagone.class.getName()).log(
-                    Level.SEVERE, null, ex);
-        }
-    }
     
 	public int[] getX_coord() {
 		return x_coord;

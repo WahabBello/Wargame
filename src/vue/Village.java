@@ -8,7 +8,6 @@ public class Village extends Hexagone  {
 
 	public Village(int x[], int y[]) {
 		super("Village", 1, 40, Color.lightGray,  x, y);
-		// TODO Auto-generated constructor stub
 	}
-
+	
 }

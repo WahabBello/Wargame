@@ -16,18 +16,5 @@ public class Montagne extends Hexagone {
 
 	public Montagne(int x[], int y[]) {
 		super("Montagne", 3, 60, Color.ORANGE, x, y);
-		this.loadImages();
 	}
-    private void loadImages() {
-
-        try {
-        	BufferedImage slate  = ImageIO.read(new File("C:\\\\Users\\\\DELL\\\\Documents\\\\Isty\\\\POO\\\\Java\\\\workspace\\\\Wargame\\\\images\\\\Mage.png"));
-//        	this.slate = ImageIO.read(new File("C:\\Users\\DELL\\Documents\\Isty\\POO\\Java\\workspace\\Wargame\\images\\Cavalerie.png"));
-            super.slatetp  = new TexturePaint(slate, this.getDessin_hexa().getBounds());
-        } catch (IOException ex) {
-
-            Logger.getLogger(Hexagone.class.getName()).log(
-                    Level.SEVERE, null, ex);
-        }
-    }
 }

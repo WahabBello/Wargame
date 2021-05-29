@@ -281,8 +281,8 @@ public class Graphisme extends JFrame {
     	 popupMenu_unite.show(panel_1, 60, 33);
 	}
 	
-	private void add_unite(String type_unité) {
-		System.out.println(type_unité);
+	private void add_unite(String type_unite) {
+		System.out.println(type_unite);
 	}
 
 	public void change_hexa(Hexagone hexa) {
@@ -290,9 +290,11 @@ public class Graphisme extends JFrame {
 	}
 
 	public void update_infos() {
-		label_terrain.setText("Terrain: " + this.hexa_selected.getType_hexa());
-		label_terrain_bd.setText("Bonus Def. : "+ this.hexa_selected.getBonus_defense());
-		label_terrain_pd.setText("Point Depl. : " + this.hexa_selected.getPoint_deplacements());
+		if(this.hexa_selected != null ) {
+			label_terrain.setText("Terrain: " + this.hexa_selected.getType_hexa());
+			label_terrain_bd.setText("Bonus Def. : "+ this.hexa_selected.getBonus_defense());
+			label_terrain_pd.setText("Point Depl. : " + this.hexa_selected.getPoint_deplacements());			
+		}
 	}	
 	
 }
