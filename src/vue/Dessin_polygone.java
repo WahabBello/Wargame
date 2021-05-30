@@ -57,6 +57,10 @@ public class Dessin_polygone extends JComponent {
                  g2d.setColor(Color.WHITE);
                  g2d.drawPolygon(this.plateau_hexas[x][y].getDessin_hexa());                 
                  
+                 if (this.plateau_hexas[x][y].getEtat() != 0) {
+                   g2d.setPaint(this.plateau_hexas[x][y].unite.loadImages(this.plateau_hexas[x][y].getDessin_hexa()));
+                   g2d.fill(this.plateau_hexas[x][y].getDessin_hexa().getBounds());
+                 }
                 //  g2d.setColor(this.tri_2[x][y].getCouleur());
                 //  g2d.drawPolygon(this.tri_2[x][y].getDessin_hexa());
 

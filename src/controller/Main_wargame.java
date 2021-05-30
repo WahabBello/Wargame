@@ -2,20 +2,18 @@ package controller;
 
 //import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
 import javax.swing.JFrame;
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
-
-//import vue.Dessin_polygone;
+import javax.swing.JOptionPane;
+import modele.Humain;
+import modele.Ordinateur;
 import vue.Graphisme;
 
 public class Main_wargame {
 
+//	static String nombre_joueurs;
+//	Joueur player;
 	public Main_wargame() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	/**
 	 * Execution de l' application pour afficher la graphisme
@@ -24,21 +22,27 @@ public class Main_wargame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-
 					Graphisme frame = new Graphisme();
-					
+				
+					String nombre_joueurs = JOptionPane.showInputDialog(frame,"Entrez le nombre de joueurs:");
+
+					for (int i = 0; i < Integer.parseInt(nombre_joueurs); i++) {
+						String nom = JOptionPane.showInputDialog(frame,"Entrez le nom du joueur "+ (i+1) +" :");
+						new Humain(nom);
+//						System.out.println(nom);
+					}	
+					frame.selection_player();
 					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					frame.setSize(1000, 600);
 					frame.setLocationRelativeTo(null);
-					
-					
-
 					frame.setVisible(true);
+					
+					JOptionPane.showMessageDialog(frame,"Bienvenue au Wargame!");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
-		});
-		
+		});	
 	}
+	
 }

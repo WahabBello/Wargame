@@ -15,6 +15,14 @@ import javax.swing.border.EmptyBorder;
 import controller.Actions_unite;
 //import controller.MouseListen;
 import controller.Plateau;
+import modele.Archer;
+import modele.Cavalerie;
+import modele.Infanterie;
+import modele.Infanterie_Lourde;
+//import modele.Humain;
+import modele.Joueur;
+import modele.Mage;
+import modele.Unite;
 
 //import controller.Dessin_polygone;
 
@@ -37,8 +45,11 @@ import javax.swing.JPopupMenu;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.JMenuItem;
+//import javax.swing.JOptionPane;
+
 import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.Canvas;
@@ -64,11 +75,17 @@ public class Graphisme extends JFrame {
 	Dessin_polygone dessin_poly;
 	JPopupMenu popupMenu_unite;
 	Panel panel_1;
+	JLabel label_user;
+	ArrayList<Joueur> players;
+	public Joueur player_actif;
+	String[] type_unites = { "Infanterie", "Infanterie Lourde", "Cavalerie", "Mage", "Archer"};
 	
 	/**
 	 * Creation des differents onglets dans la fenetre
 	 */
 	public Graphisme() {
+//		players = Joueur.getListe_joueurs();
+//		selection_player();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 543, 477);
 		contentPane = new JPanel();
@@ -150,52 +167,52 @@ public class Graphisme extends JFrame {
 
 		popupMenu_unite = new JPopupMenu();
 		
-		JMenuItem item_infanterie_cavalerie = new JMenuItem("Cavalerie");
+		JMenuItem item_infanterie_cavalerie = new JMenuItem(type_unites[2]);
 		item_infanterie_cavalerie.setActionCommand("");
 		item_infanterie_cavalerie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				add_unite("Cavalerie");
+				add_unite(type_unites[2]);
 			}
 		});
 		popupMenu_unite.add(item_infanterie_cavalerie);
 		
-		JMenuItem item_infanterie_lourde = new JMenuItem("Infanterie Lourde");
+		JMenuItem item_infanterie_lourde = new JMenuItem(type_unites[1]);
 		item_infanterie_lourde.setActionCommand("");
 		item_infanterie_lourde.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				add_unite("Infanterie Lourde");
+				add_unite(type_unites[1]);
 			}
 		});
 		popupMenu_unite.add(item_infanterie_lourde);
 		
-		JMenuItem item_archer = new JMenuItem("Archer");
+		JMenuItem item_archer = new JMenuItem(type_unites[4]);
 		item_archer.setActionCommand("");
 		item_archer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				add_unite("Archer");
+				add_unite(type_unites[4]);
 			}
 		});
 		popupMenu_unite.add(item_archer);	
 
-		JMenuItem item_infanterie = new JMenuItem("Infanterie");
+		JMenuItem item_infanterie = new JMenuItem(type_unites[0]);
 		item_infanterie.setActionCommand("");
 		item_infanterie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				add_unite("Infanterie");
+				add_unite(type_unites[0]);
 			}
 		});
 		popupMenu_unite.add(item_infanterie);
 		
-		JMenuItem item_mage = new JMenuItem("Mage");
+		JMenuItem item_mage = new JMenuItem(type_unites[3]);
 		item_mage.setActionCommand("");
 		item_mage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				add_unite("Mage");
+				add_unite(type_unites[3]);
 			}
 		});
 		popupMenu_unite.add(item_mage);	
 		
-		JLabel label_user = new JLabel("User : ");
+		label_user = new JLabel("User actif : ");
 		panel_1.add(label_user);
 	}
 	
@@ -210,6 +227,11 @@ public class Graphisme extends JFrame {
 //			panel.setBounds(40,50,150,150);
 		
 		JButton btnNewButton = new JButton("Passer le tour");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				passer_tour();
+			}
+		});
 		panel.add(btnNewButton, BorderLayout.SOUTH);
 		
 		Panel panel_2 = new Panel();
@@ -282,7 +304,38 @@ public class Graphisme extends JFrame {
 	}
 	
 	private void add_unite(String type_unite) {
-		System.out.println(type_unite);
+//		System.out.println(type_unite);
+//		switch type_unite
+//  	"Infanterie", "Infanterie Lourde", "Cavalerie", "Mage", "Archer"
+		Unite unite = null;
+		switch(type_unite) {
+		  case "Infanterie":
+		    unite = new Infanterie();
+		  	this.player_actif.ajouter_Unite(unite);
+		    break;
+		  case "Infanterie Lourde":
+			unite = new Infanterie_Lourde();
+			this.player_actif.ajouter_Unite(unite);
+		    break;
+		  case "Cavalerie":
+			unite = new Cavalerie();
+			this.player_actif.ajouter_Unite(unite);
+		    break;
+		  case "Mage":
+			unite = new Mage();
+			this.player_actif.ajouter_Unite(unite);
+		    break;
+		  case "Archer":
+			unite = new Archer();
+			this.player_actif.ajouter_Unite(unite);
+		    break;
+		  default:
+			 System.out.println("Aucune unite ajouter");
+		}
+		this.hexa_selected.unite = unite;
+		this.hexa_selected.setEtat(this.player_actif.getNumero_joueur());;
+//		players.indexOf(this.player_actif);
+		
 	}
 
 	public void change_hexa(Hexagone hexa) {
@@ -296,5 +349,22 @@ public class Graphisme extends JFrame {
 			label_terrain_pd.setText("Point Depl. : " + this.hexa_selected.getPoint_deplacements());			
 		}
 	}	
+	
+	public void selection_player() {
+		players = Joueur.getListe_joueurs();
+		this.player_actif =  players.get(0);
+		label_user.setText("User actif : " + this.player_actif.getUsername());
+	}
+	
+	public void passer_tour() {
+		int i = players.indexOf(this.player_actif); 
+		if ((i+1) == players.size()) {
+			this.player_actif =  players.get(0);
+			label_user.setText("User actif : " + this.player_actif.getUsername());
+		}else {
+			this.player_actif =  players.get(i+1);
+			label_user.setText("User actif : " + this.player_actif.getUsername());			
+		}
+	}
 	
 }

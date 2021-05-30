@@ -28,14 +28,15 @@ public class Cavalerie extends Unite {
 		}
 	}
 
-	public void loadImages(Polygon dimension) {
+	public TexturePaint loadImages(Polygon dimension) {
         try {
-        	BufferedImage slate  = ImageIO.read(new File("C:\\\\Users\\\\DELL\\\\Documents\\\\Isty\\\\POO\\\\Java\\\\workspace\\\\Wargame\\\\images\\\\Archer.png"));
+        	BufferedImage slate  = ImageIO.read(new File("C:\\\\Users\\\\DELL\\\\Documents\\\\Isty\\\\POO\\\\Java\\\\workspace\\\\Wargame\\\\images\\\\Cavalerie.png"));
             super.image_unite  = new TexturePaint(slate, dimension.getBounds());
         } catch (IOException ex) {
             Logger.getLogger(Hexagone.class.getName()).log(
                     Level.SEVERE, null, ex);
         }
+        return super.image_unite;
     }
 	
 }

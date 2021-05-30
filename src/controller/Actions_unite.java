@@ -26,7 +26,7 @@ public class Actions_unite {
                 		this.plateau.col = j;
                 		this.plateau.tri_hexa= true;
 						this.hexa_selected = this.plateau.plateau_hexas[i][j];
-//						System.out.println(this.hexa_selected.i_hexa+"<-i et j->"+this.hexa_selected.j_hexa);
+						System.out.println(this.hexa_selected.i_hexa+"<-i et j->"+this.hexa_selected.j_hexa);
                 	}
         this.plateau.repaint();
     }

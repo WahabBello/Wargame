@@ -1,5 +1,6 @@
 package modele;
 
+import java.awt.Polygon;
 import java.awt.TexturePaint;
 
 public abstract class Unite {
@@ -93,6 +94,7 @@ public abstract class Unite {
 		return this.Degat;
 	}
 	
+	public abstract TexturePaint loadImages(Polygon dimension);
 	//Recuperer le degat causé net lors d'une attaque
 	public int getDegat() {
 		return Degat;

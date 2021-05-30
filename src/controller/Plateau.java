@@ -9,18 +9,12 @@ import vue.Plaine;
 import vue.Village;
 
 // Classe principale du plateau de jeu � excuter pour l'affichage du graphisme 
-
-// public class Plateau extends JComponent  {
-// public class Plateau extends JFrame{
 public class Plateau{
 
 //	private static final long serialVersionUID = 1L;
 	
 	int size;	
-//    public Dessin_polygone carte;
 	public Hexagone[][] plateau_hexas = new Hexagone[24][24];
-	// public Hexagone[][] tri_2 = new Hexagone[9][9];
-	// public Hexagone[][] plateau_hexas = new Hexagone[9][18];
 	public int row = -1;
 	public int col = -1;
 	public boolean tri_hexa;
@@ -41,11 +35,17 @@ public class Plateau{
 
                 if(y%2 == 0)
 				{
-					plateau_hexas[x][y] = new Colline(x_init,y_init);
+					this.plateau_hexas[x][y] = new Colline(x_init,y_init);
+					this.plateau_hexas[x][y].i_hexa = x;
+                    this.plateau_hexas[x][y].j_hexa = y;
+                    this.plateau_hexas[x][y].setEtat(0);
 				}
 				else
 				{
-					plateau_hexas[x][y] = new Montagne(x_init, y_init_2);
+                    this.plateau_hexas[x][y] = new Montagne(x_init, y_init_2);
+                    this.plateau_hexas[x][y].i_hexa = x;
+                    this.plateau_hexas[x][y].j_hexa = y;
+                    this.plateau_hexas[x][y].setEtat(0);
 				}
 
                 // if (x == 2 && (y == 6 || y == 5) ) {
@@ -67,7 +67,6 @@ public class Plateau{
 
                 for (int j = 0; j < x_init.length; j++) {
                     x_init[j] += 50;
-                    // x_init_2[j] += 100;
                 }
             }
             x_init[0] = 0;
@@ -88,64 +87,6 @@ public class Plateau{
             }
         }
         
-
-//        for (int x = 0; x < 9; x++) {
-//            for (int y = 0; y < 9; y++) {
-//                if (y % 2 == 0) {
-//                    this.plateau_hexas[x][y] = this.tri_1[x][y];
-//                    this.plateau_hexas[x][y].i_hexa = x;
-//                    this.plateau_hexas[x][y].j_hexa = y;
-//                }else {
-//                    this.plateau_hexas[x][y] = this.tri_2[x][y];
-//                    this.plateau_hexas[x][y].i_hexa = x;
-//                    this.plateau_hexas[x][y].j_hexa = y;
-//                } 
-//            }
-//        }
-        
-//        for (int x = 0; x < 9; x++) {
-//            for (int y = 9; y < 18; y++) {
-//            	int j = 0;
-//                if (y % 2 == 0) {
-//                    this.plateau_hexas[x][y] = this.tri_1[x][j];
-//                    this.plateau_hexas[x][y].i_hexa = x;
-//                    this.plateau_hexas[x][y].j_hexa = y;
-//                }else {
-//                    this.plateau_hexas[x][y] = this.tri_2[x][j];
-//                    this.plateau_hexas[x][y].i_hexa = x;
-//                    this.plateau_hexas[x][y].j_hexa = y;
-//                }
-//                j++;
-//            }
-//        }
-        
-        
     }
-
-  
-//    public static void main(String[] args) {
-//		 EventQueue.invokeLater(new Runnable() {
-//		 	public void run() {
-//		 		try {
-//		 			Plateau frame = new Plateau();
-//		 			frame.setVisible(true);
-//                    
-//                     Dessin_polygone carte = new Dessin_polygone(frame.tri_1, frame.tri_2, frame.row, frame.col, frame.tri_hexa);
-//                    
-//                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//                     frame.add(carte);
-//                     frame.setSize(860, 600);
-//                    
-//		 			// Hexagone carte = InitPolygone();
-//		 	        // frame.add(carte);
-//		 	        carte.addMouseListener(new MouseListen(carte));
-//		 		} catch (Exception e) {
-//		 			e.printStackTrace();
-//		 		}
-//		 	}
-//		 });
-//    	new Plateau();
-//    }
-	 
 
 }
