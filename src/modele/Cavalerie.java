@@ -30,7 +30,7 @@ public class Cavalerie extends Unite {
 
 	public TexturePaint loadImages(Polygon dimension) {
         try {
-        	BufferedImage slate  = ImageIO.read(new File("C:\\\\Users\\\\DELL\\\\Documents\\\\Isty\\\\POO\\\\Java\\\\workspace\\\\Wargame\\\\images\\\\Cavalerie.png"));
+        	BufferedImage slate  = ImageIO.read(getClass().getResource("/Cavalerie.png"));
             super.image_unite  = new TexturePaint(slate, dimension.getBounds());
         } catch (IOException ex) {
             Logger.getLogger(Hexagone.class.getName()).log(

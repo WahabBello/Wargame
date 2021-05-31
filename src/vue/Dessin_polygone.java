@@ -81,7 +81,7 @@ public class Dessin_polygone extends JComponent {
 //  Image affichee derriere des polygones
     private void loadImages() {
          try {        	 
-        	BufferedImage slate  = ImageIO.read(new File("C:\\\\Users\\\\DELL\\\\Documents\\\\Isty\\\\POO\\\\Java\\\\workspace\\\\Wargame\\\\images\\\\plateau.png"));   
+        	BufferedImage slate = ImageIO.read(getClass().getResource("/plateau.png"));
             this.slate  = new TexturePaint(slate, new Rectangle(0, 0, 1250, 700));
          } catch (IOException ex) {
              Logger.getLogger(Hexagone.class.getName()).log(

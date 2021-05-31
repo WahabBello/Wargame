@@ -41,7 +41,7 @@ public class Mage extends Unite {
 
 	public TexturePaint loadImages(Polygon dimension) {
         try {
-        	BufferedImage slate  = ImageIO.read(new File("C:\\\\Users\\\\DELL\\\\Documents\\\\Isty\\\\POO\\\\Java\\\\workspace\\\\Wargame\\\\images\\\\Mage.png"));
+        	BufferedImage slate  =  ImageIO.read(getClass().getResource("/Mage.png"));
             super.image_unite  = new TexturePaint(slate, dimension.getBounds());
         } catch (IOException ex) {
             Logger.getLogger(Hexagone.class.getName()).log(

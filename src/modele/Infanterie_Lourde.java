@@ -31,7 +31,7 @@ public class Infanterie_Lourde extends Unite {
 	
 	public TexturePaint loadImages(Polygon dimension) {
         try {
-        	BufferedImage slate  = ImageIO.read(new File("C:\\\\Users\\\\DELL\\\\Documents\\\\Isty\\\\POO\\\\Java\\\\workspace\\\\Wargame\\\\images\\\\Infanterie_Lourde.png"));
+        	BufferedImage slate = ImageIO.read(getClass().getResource("/Infanterie_Lourde.png"));
             super.image_unite  = new TexturePaint(slate, dimension.getBounds());
         } catch (IOException ex) {
             Logger.getLogger(Hexagone.class.getName()).log(
