@@ -3,6 +3,8 @@ package modele;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 //Classe parent de tous les Joueurs
 
 public abstract class Joueur {
@@ -39,10 +41,8 @@ public abstract class Joueur {
 	}
 	
 	public void ajouter_Unite(Unite unite) {
-		if (this.nb_unite != 0) {
-			this.liste_unite.add(unite);
-			this.nb_unite--;			
-		} 
+		this.liste_unite.add(unite);
+		this.nb_unite--;			
 	}
 
 	public String getUsername() {

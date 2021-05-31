@@ -1,62 +1,37 @@
 package vue;
-//
-//import vue.Dessin_polygone;
-//import vue.Plateau;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-//import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-//import javax.swing.border.LineBorder;
-
 import controller.Actions_unite;
-//import controller.MouseListen;
 import controller.Plateau;
-import modele.Archer;
-import modele.Cavalerie;
-import modele.Infanterie;
-import modele.Infanterie_Lourde;
-//import modele.Humain;
+
 import modele.Joueur;
-import modele.Mage;
-import modele.Unite;
-
-//import controller.Dessin_polygone;
-
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
 import java.awt.Panel;
-//import java.awt.Point;
-
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.JLabel;
 import javax.swing.JPopupMenu;
-//import javax.swing.JScrollPane;
-//import javax.swing.JViewport;
-//import javax.swing.ScrollPaneConstants;
-
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.JMenuItem;
-//import javax.swing.JOptionPane;
+import javax.swing.JOptionPane;
 
 import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.Canvas;
 import javax.swing.Box;
-//import javax.swing.ImageIcon;
 import java.awt.Font;
-//import java.awt.GridBagLayout;
 
 
 
@@ -67,6 +42,7 @@ public class Graphisme extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	public Hexagone hexa_selected;
+	public Joueur player_actif;
 	JLabel label_terrain;
 	JLabel label_terrain_bd;	
 	JLabel label_terrain_pd;
@@ -77,7 +53,13 @@ public class Graphisme extends JFrame {
 	Panel panel_1;
 	JLabel label_user;
 	ArrayList<Joueur> players;
-	public Joueur player_actif;
+	Actions_unite controller;
+	JLabel label_unite;
+	JLabel label_unite_pa;
+	JLabel label_unite_pdef;
+	JLabel label_unite_pdep;
+	public Boolean mode_deplacer;
+
 	String[] type_unites = { "Infanterie", "Infanterie Lourde", "Cavalerie", "Mage", "Archer"};
 	
 	/**
@@ -85,7 +67,8 @@ public class Graphisme extends JFrame {
 	 */
 	public Graphisme() {
 //		players = Joueur.getListe_joueurs();
-//		selection_player();
+		// selection_player(); 
+		this.mode_deplacer = false;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 543, 477);
 		contentPane = new JPanel();
@@ -104,31 +87,14 @@ public class Graphisme extends JFrame {
 	public void panel_plateau_jeu(JPanel contentPane) {
 		plateau = new Plateau();
 		dessin_poly = new Dessin_polygone(plateau.plateau_hexas, plateau.row, plateau.col, plateau.tri_hexa);
-		
-//		 JScrollPane jsp = new JScrollPane(dessin_poly);
-//		 JViewport jvp = new JViewport();
-//		 jvp = jsp.getViewport();
-//		 jvp.setViewPosition(new Point(30,200));
-
-//		Panel panel_plateau = new Panel();
-//		panel_plateau.add(dessin_poly);
-//		panel_plateau.setLayout(new GridBagLayout());
-//		panel_plateau.setBorder(LineBorder.createBlackLineBorder());
-	
-	
-//		JScrollPane scrollPane = new JScrollPane(dessin_poly, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-//		scrollPane.setPreferredSize(new Dimension(600, 600));
-		
+			
 		contentPane.add(dessin_poly, BorderLayout.CENTER);
-//		data_event = new MouseListen(dessin_poly);
-//		dessin_poly.addMouseListener(data_event);
-		
-//		dessin_poly.addMouseListener(new Actions_unite(dessin_poly));
+
 		dessin_poly.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				Actions_unite controller = new Actions_unite(dessin_poly);
-				controller.selection(e);
-				change_hexa(controller.hexa_selected);
+				controller = new Actions_unite(dessin_poly);
+				// controller.selection(e, mode_deplacer);
+				selection_hexa(e);
 				update_infos();
 			}			
 		});
@@ -142,6 +108,11 @@ public class Graphisme extends JFrame {
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Deplacer");
 		mntmNewMenuItem_1.setActionCommand("");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				deplacement();
+			}
+		});
 		popupMenu_1.add(mntmNewMenuItem_1);
 	} 
 	
@@ -245,21 +216,29 @@ public class Graphisme extends JFrame {
 		canvas.setBounds(new Rectangle(0, 0, 60, 60));
 		panel_2.add(canvas);
 		
-		JLabel lblNewLabel_3 = new JLabel("Unit\u00E9 : Cavalerie");
-		lblNewLabel_3.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		panel_2.add(lblNewLabel_3);
+		label_unite = new JLabel("Unit\u00E9 : Cavalerie");
+		label_unite.setHorizontalAlignment(SwingConstants.CENTER);
+		label_unite.setPreferredSize(new Dimension(140, 16));
+		label_unite.setFont(new Font("SansSerif", Font.PLAIN, 14));
+		panel_2.add(label_unite);
 		
-		JLabel lblNewLabel = new JLabel("P. A : 100%");
-		lblNewLabel.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		panel_2.add(lblNewLabel);
+		label_unite_pa = new JLabel("P. A : 100%");
+		label_unite_pa.setHorizontalAlignment(SwingConstants.CENTER);
+		label_unite_pa.setPreferredSize(new Dimension(130, 16));
+		label_unite_pa.setFont(new Font("SansSerif", Font.PLAIN, 14));
+		panel_2.add(label_unite_pa);
 		
-		JLabel lblNewLabel_1 = new JLabel("P. D : 100%");
-		lblNewLabel_1.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		panel_2.add(lblNewLabel_1);
+		label_unite_pdef = new JLabel("P. Def : 100%");
+		label_unite_pdef.setHorizontalAlignment(SwingConstants.CENTER);
+		label_unite_pdef.setPreferredSize(new Dimension(130, 16));
+		label_unite_pdef.setFont(new Font("SansSerif", Font.PLAIN, 14));
+		panel_2.add(label_unite_pdef);
 		
-		JLabel lblNewLabel_2 = new JLabel("P. Dep : 100%");
-		lblNewLabel_2.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		panel_2.add(lblNewLabel_2);
+		label_unite_pdep = new JLabel("P. Dep : 100%");
+		label_unite_pdep.setHorizontalAlignment(SwingConstants.CENTER);
+		label_unite_pdep.setPreferredSize(new Dimension(130, 16));
+		label_unite_pdep.setFont(new Font("SansSerif", Font.PLAIN, 14));
+		panel_2.add(label_unite_pdep);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(20);
 		horizontalStrut.setBackground(Color.DARK_GRAY);
@@ -303,47 +282,53 @@ public class Graphisme extends JFrame {
     	 popupMenu_unite.show(panel_1, 60, 33);
 	}
 	
-	private void add_unite(String type_unite) {
-//		System.out.println(type_unite);
-//		switch type_unite
-//  	"Infanterie", "Infanterie Lourde", "Cavalerie", "Mage", "Archer"
-		Unite unite = null;
-		switch(type_unite) {
-		  case "Infanterie":
-		    unite = new Infanterie();
-		  	this.player_actif.ajouter_Unite(unite);
-		    break;
-		  case "Infanterie Lourde":
-			unite = new Infanterie_Lourde();
-			this.player_actif.ajouter_Unite(unite);
-		    break;
-		  case "Cavalerie":
-			unite = new Cavalerie();
-			this.player_actif.ajouter_Unite(unite);
-		    break;
-		  case "Mage":
-			unite = new Mage();
-			this.player_actif.ajouter_Unite(unite);
-		    break;
-		  case "Archer":
-			unite = new Archer();
-			this.player_actif.ajouter_Unite(unite);
-		    break;
-		  default:
-			 System.out.println("Aucune unite ajouter");
+	private void add_unite(String type_unite) {	
+		if (this.hexa_selected != null){
+			if(player_actif.nb_unite != 0 && this.hexa_selected.getEtat() == 0) {
+				controller.ajouter_unite(type_unite, player_actif, this.hexa_selected);			
+			}else if(this.hexa_selected.getEtat() != 0){
+				JOptionPane.showMessageDialog(this,"Hexagone deja occupee");
+			}else{
+				JOptionPane.showMessageDialog(this,"Vous avez epuise votre nombre d'unite");
+			}
+		}else{
+			JOptionPane.showMessageDialog(this,"Selectionnner un hexagone d'abord");
 		}
-		this.hexa_selected.unite = unite;
-		this.hexa_selected.setEtat(this.player_actif.getNumero_joueur());;
-//		players.indexOf(this.player_actif);
-		
 	}
 
 	public void change_hexa(Hexagone hexa) {
 		this.hexa_selected = hexa;
 	}
 
+	public void deplacement() {
+		if (this.hexa_selected != null){
+			controller.deplacer(this.hexa_selected, this.player_actif, this.mode_deplacer);
+			this.mode_deplacer = true;
+		}else{
+			JOptionPane.showMessageDialog(this,"Selectionnner une ubite d'abord");
+		}
+		if (this.mode_deplacer){
+			System.out.println("true");
+		}else {
+			System.out.println("false");
+		}
+	}
+
+	public void selection_hexa(MouseEvent e){
+		controller.selection(e, this.mode_deplacer, this.hexa_selected, this.player_actif);
+		this.mode_deplacer = false;
+		change_hexa(controller.hexa_selected);
+
+	}
+
 	public void update_infos() {
 		if(this.hexa_selected != null ) {
+			if(this.hexa_selected.getEtat() != 0 ) {
+				label_unite.setText("Unit\u00E9 : " + this.hexa_selected.unite.getNom());
+				label_unite_pa.setText("P. A : "+ this.hexa_selected.unite.getPoint_Attaque());
+				label_unite_pdef.setText("P. Def   : " + this.hexa_selected.unite.getPoint_Defense());				
+				label_unite_pdep.setText("P. Dep : " + this.hexa_selected.unite.getPoint_Deplacement());				
+			}
 			label_terrain.setText("Terrain: " + this.hexa_selected.getType_hexa());
 			label_terrain_bd.setText("Bonus Def. : "+ this.hexa_selected.getBonus_defense());
 			label_terrain_pd.setText("Point Depl. : " + this.hexa_selected.getPoint_deplacements());			

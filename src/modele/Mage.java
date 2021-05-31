@@ -30,12 +30,12 @@ public class Mage extends Unite {
 	
 	public void Niveau_Vie(int degat) {
 		if(degat >=0) {
-			this.Point_vie_restant = this.Point_Vie - degat;
-			System.out.println("Il vous reste " + this.Point_vie_restant + " Points de vie");
+			super.setPoint_vie_restant(super.getPoint_Vie() - degat);
+			System.out.println("Il vous reste " + super.getPoint_vie_restant() + " Points de vie");
 		}
 		else {
-			this.Point_vie_restant = this.Point_Vie + degat;
-			System.out.println("Il vous reste " + this.Point_vie_restant + " Points de vie");
+			super.setPoint_vie_restant(super.getPoint_Vie() + degat);
+			System.out.println("Il vous reste " + super.getPoint_vie_restant() + " Points de vie");
 		}
 	}
 
