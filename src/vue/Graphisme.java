@@ -46,7 +46,7 @@ public class Graphisme extends JFrame {
 	JLabel label_terrain;
 	JLabel label_terrain_bd;	
 	JLabel label_terrain_pd;
-	MouseListen data_event;
+	// MouseListen data_event;
 	Plateau plateau;
 	Dessin_polygone dessin_poly;
 	JPopupMenu popupMenu_unite;

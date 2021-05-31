@@ -35,19 +35,13 @@ public class Actions_unite {
                 		if (mode_deplacer && hexa_choisi != null){
 							this.plateau.row = i;
 							this.plateau.col = j;	
-							this.plateau.tri_hexa= true;				
-							// this.hexa_selected2 = this.plateau.plateau_hexas[i][j];
-							// this.hexa_selected2.unite = hexa_choisi.unite;
+							this.plateau.tri_hexa= true;
 							if(hexa_choisi.getEtat() != 0){
 								this.plateau.plateau_hexas[i][j].unite = hexa_choisi.unite;
 								this.plateau.plateau_hexas[i][j].setEtat(player_actif.getNumero_joueur());
-							}else{
-								System.out.println("je ne sais pas");
 							}
-						
 							hexa_choisi.unite = null;
 							hexa_choisi.setEtat(0);
-							// mode_deplacer = false;
 						}else {
 							this.plateau.row = i;
 							this.plateau.col = j;
