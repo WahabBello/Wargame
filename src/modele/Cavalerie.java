@@ -16,17 +16,6 @@ public class Cavalerie extends Unite {
 	public Cavalerie() {
 		super("Cavalerie", 8, 3, 8, 6, 38);
 	}
-	
-	public void Niveau_Vie(int degat) {
-		if(degat >=0) {
-			super.setPoint_vie_restant(super.getPoint_Vie() - degat);
-			System.out.println("Il vous reste " + super.getPoint_vie_restant() + " Points de vie");
-		}
-		else {
-			super.setPoint_vie_restant(super.getPoint_Vie() + degat);
-			System.out.println("Il vous reste " + super.getPoint_vie_restant() + " Points de vie");
-		}
-	}
 
 	public TexturePaint loadImages(Polygon dimension) {
         try {

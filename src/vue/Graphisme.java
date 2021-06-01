@@ -54,11 +54,15 @@ public class Graphisme extends JFrame {
 	JLabel label_user;
 	ArrayList<Joueur> players;
 	Actions_unite controller;
+	JLabel label_etat_hexa;
+	JLabel label_num_joueur;
 	JLabel label_unite;
 	JLabel label_unite_pa;
 	JLabel label_unite_pdef;
 	JLabel label_unite_pdep;
+	JLabel label_unite_pdevie;
 	public Boolean mode_deplacer;
+	public Boolean mode_attaquer;
 
 	String[] type_unites = { "Infanterie", "Infanterie Lourde", "Cavalerie", "Mage", "Archer"};
 	
@@ -69,6 +73,7 @@ public class Graphisme extends JFrame {
 //		players = Joueur.getListe_joueurs();
 		// selection_player(); 
 		this.mode_deplacer = false;
+		this.mode_attaquer = false;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 543, 477);
 		contentPane = new JPanel();
@@ -103,6 +108,11 @@ public class Graphisme extends JFrame {
 		addPopup(dessin_poly, popupMenu_1);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Attaquer");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				attaquer();
+			}
+		});
 		mntmNewMenuItem.setActionCommand("");
 		popupMenu_1.add(mntmNewMenuItem);
 		
@@ -216,44 +226,62 @@ public class Graphisme extends JFrame {
 		canvas.setBounds(new Rectangle(0, 0, 60, 60));
 		panel_2.add(canvas);
 		
+		label_etat_hexa = new JLabel("Etat Hexa : ??");
+		label_etat_hexa.setHorizontalAlignment(SwingConstants.CENTER);
+		label_etat_hexa.setPreferredSize(new Dimension(140, 16));
+		label_etat_hexa.setFont(new Font("SansSerif", Font.PLAIN, 14));
+		panel_2.add(label_etat_hexa);
+		
+		label_num_joueur = new JLabel("Joueur : ??");
+		label_num_joueur.setHorizontalAlignment(SwingConstants.CENTER);
+		label_num_joueur.setPreferredSize(new Dimension(140, 16));
+		label_num_joueur.setFont(new Font("SansSerif", Font.PLAIN, 14));
+		panel_2.add(label_num_joueur);
+		
 		label_unite = new JLabel("Unit\u00E9 : Cavalerie");
 		label_unite.setHorizontalAlignment(SwingConstants.CENTER);
 		label_unite.setPreferredSize(new Dimension(140, 16));
 		label_unite.setFont(new Font("SansSerif", Font.PLAIN, 14));
 		panel_2.add(label_unite);
 		
-		label_unite_pa = new JLabel("P. A : 100%");
+		label_unite_pa = new JLabel("P. A : ??");
 		label_unite_pa.setHorizontalAlignment(SwingConstants.CENTER);
 		label_unite_pa.setPreferredSize(new Dimension(130, 16));
 		label_unite_pa.setFont(new Font("SansSerif", Font.PLAIN, 14));
 		panel_2.add(label_unite_pa);
 		
-		label_unite_pdef = new JLabel("P. Def : 100%");
+		label_unite_pdef = new JLabel("P. Defense : ??");
 		label_unite_pdef.setHorizontalAlignment(SwingConstants.CENTER);
 		label_unite_pdef.setPreferredSize(new Dimension(130, 16));
 		label_unite_pdef.setFont(new Font("SansSerif", Font.PLAIN, 14));
 		panel_2.add(label_unite_pdef);
 		
-		label_unite_pdep = new JLabel("P. Dep : 100%");
+		label_unite_pdep = new JLabel("P. Depla : ??");
 		label_unite_pdep.setHorizontalAlignment(SwingConstants.CENTER);
 		label_unite_pdep.setPreferredSize(new Dimension(130, 16));
 		label_unite_pdep.setFont(new Font("SansSerif", Font.PLAIN, 14));
 		panel_2.add(label_unite_pdep);
+		
+		label_unite_pdevie = new JLabel("P. De Vie : ??");
+		label_unite_pdevie.setHorizontalAlignment(SwingConstants.CENTER);
+		label_unite_pdevie.setPreferredSize(new Dimension(130, 16));
+		label_unite_pdevie.setFont(new Font("SansSerif", Font.PLAIN, 14));
+		panel_2.add(label_unite_pdevie);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(20);
 		horizontalStrut.setBackground(Color.DARK_GRAY);
 		horizontalStrut.setPreferredSize(new Dimension(100, 11));
 		panel_2.add(horizontalStrut);
 		
-		label_terrain = new JLabel("Terrain: Foret");
+		label_terrain = new JLabel("Terrain: ??");
 		label_terrain.setFont(new Font("SansSerif", Font.PLAIN, 14));
 		panel_2.add(label_terrain);
 		
-		label_terrain_bd = new JLabel("Bonus Def. : 100%");
+		label_terrain_bd = new JLabel("Bonus Def. : ??");
 		label_terrain_bd.setFont(new Font("SansSerif", Font.PLAIN, 14));
 		panel_2.add(label_terrain_bd);
 		
-		label_terrain_pd = new JLabel("Point Depl. : 7");
+		label_terrain_pd = new JLabel("Point Depl. : ??");
 		label_terrain_pd.setFont(new Font("SansSerif", Font.PLAIN, 14));
 		panel_2.add(label_terrain_pd);
 	}
@@ -300,23 +328,32 @@ public class Graphisme extends JFrame {
 		this.hexa_selected = hexa;
 	}
 
-	public void deplacement() {
+	public void attaquer() {
 		if (this.hexa_selected != null){
-			controller.deplacer(this.hexa_selected, this.player_actif, this.mode_deplacer);
-			this.mode_deplacer = true;
+			// controller.deplacer(this.hexa_selected, this.player_actif, this.mode_deplacer);
+			this.mode_attaquer = true;
 		}else{
-			JOptionPane.showMessageDialog(this,"Selectionnner une ubite d'abord");
-		}
-		if (this.mode_deplacer){
-			System.out.println("true");
-		}else {
-			System.out.println("false");
+			JOptionPane.showMessageDialog(this,"Selectionnner une unite d'abord");
 		}
 	}
 
+	public void deplacement() {
+		if (this.hexa_selected != null){
+			this.mode_deplacer = true;
+		}else{
+			JOptionPane.showMessageDialog(this,"Selectionnner une unite d'abord");
+		}
+		// if (this.mode_deplacer){
+		// 	System.out.println("true");
+		// }else {
+		// 	System.out.println("false");
+		// }
+	}
+
 	public void selection_hexa(MouseEvent e){
-		controller.selection(e, this.mode_deplacer, this.hexa_selected, this.player_actif);
+		controller.selection(e, this.mode_deplacer, this.mode_attaquer, this.hexa_selected, this.player_actif, dessin_poly);
 		this.mode_deplacer = false;
+		this.mode_attaquer = false;
 		change_hexa(controller.hexa_selected);
 
 	}
@@ -324,10 +361,13 @@ public class Graphisme extends JFrame {
 	public void update_infos() {
 		if(this.hexa_selected != null ) {
 			if(this.hexa_selected.getEtat() != 0 ) {
+				label_num_joueur.setText("Joueur : " + this.player_actif.getNumero_joueur());
+				label_etat_hexa.setText("Etat Hexa : " + this.hexa_selected.getEtat());
 				label_unite.setText("Unit\u00E9 : " + this.hexa_selected.unite.getNom());
 				label_unite_pa.setText("P. A : "+ this.hexa_selected.unite.getPoint_Attaque());
-				label_unite_pdef.setText("P. Def   : " + this.hexa_selected.unite.getPoint_Defense());				
-				label_unite_pdep.setText("P. Dep : " + this.hexa_selected.unite.getPoint_Deplacement());				
+				label_unite_pdef.setText("P. Defense   : " + this.hexa_selected.unite.getPoint_Defense());				
+				label_unite_pdep.setText("P. Depla : " + this.hexa_selected.unite.getPoint_Deplacement_Restant());				
+				label_unite_pdevie.setText("P. De Vie : " + this.hexa_selected.unite.getPoint_vie_restant());				
 			}
 			label_terrain.setText("Terrain: " + this.hexa_selected.getType_hexa());
 			label_terrain_bd.setText("Bonus Def. : "+ this.hexa_selected.getBonus_defense());
@@ -349,6 +389,9 @@ public class Graphisme extends JFrame {
 		}else {
 			this.player_actif =  players.get(i+1);
 			label_user.setText("User actif : " + this.player_actif.getUsername());			
+		}
+		for (i=0; i < this.player_actif.getListe_unite().size(); i ++){
+			this.player_actif.getListe_unite().get(i).setPoint_Deplacement_Restant(this.player_actif.getListe_unite().get(i).getPoint_Deplacement());
 		}
 	}
 	

@@ -12,10 +12,10 @@ public abstract class Joueur {
 	private String username;
 	private Color color;
 	private int numero_joueur;
-	static int numero;
+	static int numero = 0;
 	private static ArrayList<Joueur> liste_joueurs = new ArrayList<Joueur>();
 	private ArrayList<Unite> liste_unite = new ArrayList<Unite>();
-	public int nb_unite = 10; 
+	public int nb_unite = 5; 
 	
 //	public Joueur(String nom) {
 //
@@ -24,7 +24,7 @@ public abstract class Joueur {
 	public Joueur(String nom) {
 		this.setUsername(nom);
 		numero++;
-		this.setNumero_joueur(numero++);
+		this.setNumero_joueur(numero);
 		this.add_joueur(this);
 	}
 

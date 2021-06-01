@@ -10,14 +10,11 @@ import vue.Graphisme;
 
 public class Main_wargame {
 
-//	static String nombre_joueurs;
-//	Joueur player;
-	public Main_wargame() {
+	public Main_wargame() { 
 		
 	}
-	/**
-	 * Execution de l' application pour afficher la graphisme
-	 */
+	
+	/**  Execution de l' application pour afficher la graphisme  */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
