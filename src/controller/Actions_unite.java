@@ -67,9 +67,10 @@ public class Actions_unite {
 				// if (hexa_choisi.unite.vision_v(hexa_choisi, plateau_hexas)){
 				if (hexa_choisi.unite.Atteignable(hexa_choisi, plateau_hexas)){
 					hexa_choisi.unite.Attaque(hexa_choisi, plateau_hexas);
-					plateau_hexas.unite.Niveau_Vie(hexa_choisi.unite.getDegat());
+					System.out.println("hexa depart : degat causé =" + hexa_choisi.unite.getDegat());
+					
+					plateau_hexas.unite.Niveau_Vie(plateau_hexas,hexa_choisi.unite.getDegat());
 					// hexa_choisi.unite.Attaque(hexa_choisi, plateau_hexas);
-					System.out.println("hexa depart : degat causée =" + hexa_choisi.unite.getDegat());
 					System.out.println("hexa arrive : Point de vie =" + plateau_hexas.unite.getPoint_vie_restant());
 
 					if(plateau_hexas.unite.getPoint_vie_restant() <= 0){
