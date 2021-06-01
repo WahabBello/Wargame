@@ -14,7 +14,7 @@ public class Main_wargame {
 		
 	}
 	
-	/**  Execution de l' application pour afficher la graphisme  */
+	/*  Fichier principale pour executer l'application et afficher la graphisme  */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

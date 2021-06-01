@@ -43,6 +43,8 @@ public class Graphisme extends JFrame {
 	private JPanel contentPane;
 	public Hexagone hexa_selected;
 	public Joueur player_actif;
+	public Boolean mode_deplacer;
+	public Boolean mode_attaquer; 
 	JLabel label_terrain;
 	JLabel label_terrain_bd;	
 	JLabel label_terrain_pd;
@@ -61,8 +63,6 @@ public class Graphisme extends JFrame {
 	JLabel label_unite_pdef;
 	JLabel label_unite_pdep;
 	JLabel label_unite_pdevie;
-	public Boolean mode_deplacer;
-	public Boolean mode_attaquer;
 
 	String[] type_unites = { "Infanterie", "Infanterie Lourde", "Cavalerie", "Mage", "Archer"};
 	
@@ -90,7 +90,9 @@ public class Graphisme extends JFrame {
 
 	//**** Partie sur lequel est affich� nos polygones 		
 	public void panel_plateau_jeu(JPanel contentPane) {
+	//**** Importation du plateau 2D contenant tous les hexagone. 		
 		plateau = new Plateau();
+	//**** Importation la classe contenant l'affichage du plateau avec les infos du plateau en parametre. 		
 		dessin_poly = new Dessin_polygone(plateau.plateau_hexas, plateau.row, plateau.col, plateau.tri_hexa);
 			
 		contentPane.add(dessin_poly, BorderLayout.CENTER);
