@@ -85,8 +85,6 @@ public class Plateau{
                 y_init[j_x] += 60;
                 y_init_2[j_x] += 60;
             }
-        }
-        
+        }        
     }
-
 }

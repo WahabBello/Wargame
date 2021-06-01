@@ -18,11 +18,12 @@ public class Actions_unite {
 	public Dessin_polygone plateau;
 	public Hexagone hexa_selected;
 	public Hexagone hexa_selected2;
-	// public Boolean mode_deplacer = false;
 	
 	public Actions_unite(Dessin_polygone plateau) {
 		this.plateau = plateau;
 	}
+
+	// Selectionner des cliques d'hexagone pour soit attaquer ou se deplacer.  
 
     public void selection(MouseEvent e, Boolean mode_deplacer, Boolean mode_attaquer, Hexagone hexa_choisi, Joueur player_actif, Dessin_polygone dessin_poly) {
         int x = e.getX();
@@ -93,6 +94,7 @@ public class Actions_unite {
 		}
 	
 	}
+
     // Methode private pour verifier les conditions de deplacement et effectuer l'effectuer si possible
 	private void deplacer(Hexagone hexa_choisi, Joueur player_actif, Dessin_polygone dessin_poly, Hexagone plateau_hexas) {
 
@@ -117,10 +119,9 @@ public class Actions_unite {
 		}
 	}
 
-
+    // Methode pour ajouter les unites sur un hexagone avec l'etat de l'unité 
 
 	public void ajouter_unite(String type_unite, Joueur player_actif, Hexagone hexa_selected) {
-//  	"Infanterie", "Infanterie Lourde", "Cavalerie", "Mage", "Archer"
 		Unite unite = null;
 		switch(type_unite) {
 		  case "Infanterie":
@@ -152,14 +153,4 @@ public class Actions_unite {
 
 		this.plateau.repaint();
 	}
-
-	// public void deplacer(Hexagone hexa_selected, Joueur player_actif, Boolean mode_deplacer) {
-	// 	if(hexa_selected.unite == null){
-	// 		System.out.println("Selectionner une unite");
-	// 		// JOptionPane.showMessageDialog(dessin_poly,"Selectionner une unite");
-	// 	}else{
-	// 		System.out.println("Tu peux deplacer");
-	// 		// JOptionPane.showMessageDialog(dessin_poly,"Selctionner une case vide pour le deplacement");
-	// 	}
-	// }
 }

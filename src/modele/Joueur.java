@@ -17,10 +17,7 @@ public abstract class Joueur {
 	private ArrayList<Unite> liste_unite = new ArrayList<Unite>();
 	public int nb_unite = 5; 
 	
-//	public Joueur(String nom) {
-//
-//	}
-	
+
 	public Joueur(String nom) {
 		this.setUsername(nom);
 		numero++;

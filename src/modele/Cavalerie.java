@@ -11,11 +11,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
+    //Classe fille de chaque unité
 public class Cavalerie extends Unite {
 
 	public Cavalerie() {
 		super("Cavalerie", 8, 3, 8, 6, 38);
 	}
+
+    // Chargement de l'image 
 
 	public TexturePaint loadImages(Polygon dimension) {
         try {

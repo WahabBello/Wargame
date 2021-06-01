@@ -11,22 +11,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
+    //Classe fille de chaque unité
 
 public class Mage extends Unite {
-	// private Image image;
-	// private int width;
-	// private int height;
 
 	public Mage() {
 		super("Mage", 5, 1, 5, 5, 24);
-		
-		// ImageIcon i = new ImageIcon("src/Image/Mage.png");
-		// this.image = i.getImage();
-		// this.width = image.getWidth(null);
-		// this.height = image.getHeight(null);
-		//this.loadImages();
 	}
 
+    // chargement de l'image 
 
 	public TexturePaint loadImages(Polygon dimension) {
         try {

@@ -2,13 +2,10 @@ package vue;
 
 import java.awt.Color;
 import java.awt.Polygon;
-
 import modele.Unite;
 
-
-
-//Classe parent de chaque hexagone 
-
+	// Classe parent de chaque hexagone 
+	
 public abstract class Hexagone {
 
 	private String type_hexa ;

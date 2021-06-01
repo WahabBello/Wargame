@@ -6,8 +6,8 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.TexturePaint;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
+// import java.io.File;
+// import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,13 +17,7 @@ import javax.swing.JComponent;
 // Initialisation des tableaux de polygone avec leurs differents couleurs
 public class Dessin_polygone extends JComponent {
 
-/**
-	 * 
-	 */
 	private static final long serialVersionUID = 9218121229296185852L;
-//    private static final long serialVersionUID = 1L;
-    // public Hexagone[][] plateau_hexas;
-    // public Hexagone[][] tri_2;
     public Hexagone[][] plateau_hexas;
     public int row;
     public int col;
@@ -37,6 +31,8 @@ public class Dessin_polygone extends JComponent {
         this.tri_hexa = tri_hexa;
         loadImages();
     }
+
+    // Fonction d'affichage des hexagones du plateau 
 
     public void paint(Graphics g) {
 
@@ -83,7 +79,6 @@ public class Dessin_polygone extends JComponent {
     private void loadImages() {
          try {        	 
         	BufferedImage slate = ImageIO.read(getClass().getResource("/plateau.png"));
-        	// BufferedImage slate = ImageIO.read(new FileInputStream("images/plateau.png"));
             this.slate  = new TexturePaint(slate, new Rectangle(0, 0, 1250, 700));
          } catch (IOException ex) {
              Logger.getLogger(Hexagone.class.getName()).log(

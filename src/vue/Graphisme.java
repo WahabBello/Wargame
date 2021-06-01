@@ -66,12 +66,9 @@ public class Graphisme extends JFrame {
 
 	String[] type_unites = { "Infanterie", "Infanterie Lourde", "Cavalerie", "Mage", "Archer"};
 	
-	/**
-	 * Creation des differents onglets dans la fenetre
-	 */
+	/**  Creation des differents onglets dans la fenetre	 */
+
 	public Graphisme() {
-//		players = Joueur.getListe_joueurs();
-		// selection_player(); 
 		this.mode_deplacer = false;
 		this.mode_attaquer = false;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -88,7 +85,7 @@ public class Graphisme extends JFrame {
 		right_panel(contentPane);	
 	}
 
-	//**** Partie sur lequel est affich� nos polygones 		
+	//**** Partie sur lequel est affiche nos polygones 		
 	public void panel_plateau_jeu(JPanel contentPane) {
 	//**** Importation du plateau 2D contenant tous les hexagone. 		
 		plateau = new Plateau();
@@ -97,6 +94,7 @@ public class Graphisme extends JFrame {
 			
 		contentPane.add(dessin_poly, BorderLayout.CENTER);
 
+		// Ecoute des cliques sur le dessin polygone
 		dessin_poly.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				controller = new Actions_unite(dessin_poly);
@@ -128,6 +126,7 @@ public class Graphisme extends JFrame {
 		popupMenu_1.add(mntmNewMenuItem_1);
 	} 
 	
+	// Methode d'affichages des informations en haut
 	public void top_panel (JPanel contentPane) {
 		panel_1 = new Panel();
 		contentPane.add(panel_1, BorderLayout.NORTH);
@@ -199,6 +198,8 @@ public class Graphisme extends JFrame {
 		panel_1.add(label_user);
 	}
 	
+	// Methode d'affichages des informations a droite
+
 	public void right_panel(JPanel contentPane) {
 		Panel panel = new Panel();
 		panel.setPreferredSize(new Dimension(150, 10));
@@ -287,6 +288,8 @@ public class Graphisme extends JFrame {
 		label_terrain_pd.setFont(new Font("SansSerif", Font.PLAIN, 14));
 		panel_2.add(label_terrain_pd);
 	}
+
+	// Methode d'affichages du pop up quand on fait click droit
 	
 	private void addPopup(Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {
@@ -307,10 +310,14 @@ public class Graphisme extends JFrame {
 			}
 		});
 	}
+
+	// Methode d'affichages du pop up quand on fait click les ajout unites
 	
 	private void showOptionsUnites() {
     	 popupMenu_unite.show(panel_1, 60, 33);
 	}
+
+	// Methode pour ajouter une unitee
 	
 	private void add_unite(String type_unite) {	
 		if (this.hexa_selected != null){
@@ -326,9 +333,12 @@ public class Graphisme extends JFrame {
 		}
 	}
 
+	// Methode pour changer l'hexagone selectionner
+
 	public void change_hexa(Hexagone hexa) {
 		this.hexa_selected = hexa;
 	}
+	// Methode pour attaquer 
 
 	public void attaquer() {
 		if (this.hexa_selected != null){
@@ -339,18 +349,19 @@ public class Graphisme extends JFrame {
 		}
 	}
 
+	// Methode pour deplacement 
+
 	public void deplacement() {
 		if (this.hexa_selected != null){
 			this.mode_deplacer = true;
 		}else{
 			JOptionPane.showMessageDialog(this,"Selectionnner une unite d'abord");
 		}
-		// if (this.mode_deplacer){
-		// 	System.out.println("true");
-		// }else {
-		// 	System.out.println("false");
-		// }
+
 	}
+
+
+	// Methode pour selectioner  le 2 eme hexagone et ainsi attaquer ou se deplacer 
 
 	public void selection_hexa(MouseEvent e){
 		controller.selection(e, this.mode_deplacer, this.mode_attaquer, this.hexa_selected, this.player_actif, dessin_poly);
@@ -359,6 +370,8 @@ public class Graphisme extends JFrame {
 		change_hexa(controller.hexa_selected);
 
 	}
+
+	// Methode pour mise à jour les infos a droite selectionner le 2eme   
 
 	public void update_infos() {
 		if(this.hexa_selected != null ) {
@@ -377,14 +390,19 @@ public class Graphisme extends JFrame {
 		}
 	}	
 	
+	// Methode pour selectionner player actif  
+
 	public void selection_player() {
 		players = Joueur.getListe_joueurs();
 		this.player_actif =  players.get(0);
 		label_user.setText("User actif : " + this.player_actif.getUsername());
 	}
 	
+	// Methode pour passer le tour   
+
 	public void passer_tour() {
 		int i = players.indexOf(this.player_actif); 
+		
 		if ((i+1) == players.size()) {
 			this.player_actif =  players.get(0);
 			label_user.setText("User actif : " + this.player_actif.getUsername());
@@ -392,7 +410,8 @@ public class Graphisme extends JFrame {
 			this.player_actif =  players.get(i+1);
 			label_user.setText("User actif : " + this.player_actif.getUsername());			
 		}
-		for (i=0; i < this.player_actif.getListe_unite().size(); i ++){
+
+		for (i=0; i < this.player_actif.getListe_unite().size(); i++ ){
 			this.player_actif.getListe_unite().get(i).setPoint_Deplacement_Restant(this.player_actif.getListe_unite().get(i).getPoint_Deplacement());
 		}
 	}

@@ -8,7 +8,6 @@ public class Foret extends Hexagone {
 
 	public Foret(int x[], int y[]) {
 		super("Foret", 2, 40, Color.GREEN, x, y);
-		// TODO Auto-generated constructor stub
 	}
 
 }
