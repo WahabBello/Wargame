@@ -53,17 +53,7 @@ public abstract class Unite {
 			arrive.unite.setPoint_Deplacement_Restant(arrive.unite.getPoint_Deplacement_Restant() - arrive.getPoint_deplacements());
 	}
 	
-	// Verifie si une case contient déja une unité ou pas
-	// public boolean EtatCase(Object objet) {
-	// 	if(objet != null) {
-	// 		System.out.println("Objet est présent");
-	// 		return true;
-	// 	}
-	// 	else { 
-	// 		System.out.println("Objet n'a pas été crée");
-	// 		return false;
-	// 	}
-	// }
+	
 	/*
 		*Vérifie si une attaque est possible 
 		*/
@@ -93,11 +83,11 @@ public abstract class Unite {
 			// int min = -this.Degat_Brut/2;
 			// int max = this.Degat_Brut/2;
 			// this.Degat = this.Degat_Brut + (nombre_aleatoire);
-			depart.unite.setDegat_Brut(depart.unite.getPoint_Attaque() - ( arrive.unite.getPoint_Defense() + (arrive.unite.getPoint_Defense() * arrive.getBonus_defense() / 100 ) + 1 ));
-			int min = - depart.unite.getDegat_Brut() / 2;
+			depart.unite.setDegat_Brut(depart.unite.getPoint_Attaque() - ( arrive.unite.getPoint_Defense() + (arrive.unite.getPoint_Defense()*arrive.getBonus_defense() / 100 ) + 1 ));
+			int min = -depart.unite.getDegat_Brut() / 2;
 			int max = depart.unite.getDegat_Brut() / 2;
-			int range = max - min + 1;
-			int nombre_aleatoire = (int) (Math.random() * range ) + min;
+			int range = max-min + 1;
+			int nombre_aleatoire = (int) (Math.random()*range ) + min;
 				
 			depart.unite.setDegat(depart.unite.getDegat_Brut() + (nombre_aleatoire));
 			// System.out.println(this.Nom + " a attaqué " + unite.Nom + " et lui causé " + (this.Degat) + " Points");	
@@ -111,33 +101,33 @@ public abstract class Unite {
 	}
 	
 
-	public void Niveau_Vie(int degat) {
+	public void Niveau_Vie(Hexagone arrive, int degat) {
 		if(degat >= 0) {
 			// this.Point_vie_restant = this.Point_Vie - degat;
 			// System.out.println("Il vous reste " + this.Point_vie_restant + " Points de vie");
-			this.setPoint_vie_restant(this.getPoint_vie_restant() - degat);
-			System.out.println("Il vous reste " + this.getPoint_vie_restant() + " Points de vie");
+			// this.setPoint_vie_restant(this.getPoint_vie_restant() - degat);
+			arrive.unite.setPoint_vie_restant(arrive.unite.getPoint_vie_restant() - degat);
+			//System.out.println("Il vous reste " +arrive.unite.getPoint_vie_restant() + " Points de vie");
 		}
 		else {
 			// this.Point_vie_restant = this.Point_Vie + degat;
 			// System.out.println("Il vous reste " + this.Point_vie_restant + " Points de vie");
 			this.setPoint_vie_restant(this.getPoint_vie_restant() + degat);
-			System.out.println("Il vous reste " + this.getPoint_vie_restant() + " Points de vie");
+			//System.out.println("Il vous reste " + this.getPoint_vie_restant() + " Points de vie");
 		}
 	}
 
 
-	//Recuperer le degat causé net lors d'une attaque
-	public int getDegat() {
-		return Degat;
-	}
 	
 		//regenerer une unité
-	public void Recuperer(Unite unite) {
-		int regenere = ( (10*unite.Point_Vie/100) +1);
-		unite.Point_Vie = regenere  + unite.Point_vie_restant;
-		System.out.println(unite.Nom + " s'est regenerée de " + regenere + " Points");
-		System.out.println("Points de vie :  " + unite.Point_Vie);
+	public void Recuperer(Hexagone hexa) {
+	//	int regenere = ( (10*unite.Point_Vie/100) +1);
+		int regenere = ( (10*hexa.unite.getPoint_Vie()/100) +1);
+		
+	//	unite.Point_Vie = regenere  + unite.Point_vie_restant;
+		hexa.unite.setPoint_vie_restant(hexa.unite.getPoint_vie_restant() + regenere);
+		System.out.println(hexa.unite.getNom()+ " s'est regenerée de " + regenere + " Points");
+		System.out.println("Points de vie :  " + hexa.unite.getPoint_vie_restant());
 			
 	}
 
@@ -213,6 +203,10 @@ public abstract class Unite {
 
 	public void setDegat_Brut(int degat_Brut) {
 		Degat_Brut = degat_Brut;
+	}
+
+	public int getDegat() {
+		return Degat;
 	}
 
 	public void setDegat(int degat) {
