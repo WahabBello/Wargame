@@ -1,4 +1,4 @@
-package sauvegarde;
+package modele;
 
 import java.io.File;
 import java.io.FileWriter;
