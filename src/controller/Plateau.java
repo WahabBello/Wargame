@@ -11,8 +11,6 @@ import vue.Village;
 // Classe principale du plateau de jeu � excuter pour l'affichage du graphisme 
 public class Plateau{
 
-//	private static final long serialVersionUID = 1L;
-	
 	int size;	
 	public Hexagone[][] plateau_hexas = new Hexagone[24][24];
 	public int row = -1;
@@ -33,39 +31,12 @@ public class Plateau{
         for (int x = 0; x < this.plateau_hexas.length; x++) {
             for (int y = 0; y <  this.plateau_hexas.length; y++) {
                 if(y%2 == 0){
-					// this.plateau_hexas[x][y] = new Colline(x_init,y_init);
-					// this.plateau_hexas[x][y].i_hexa = x;
-                    // this.plateau_hexas[x][y].j_hexa = y;
-                    // this.plateau_hexas[x][y].setEtat(0);
                     choix_type_hexa(this.plateau_hexas, x, y, x_init, y_init);
 				}
 				else
 				{
-                    // this.plateau_hexas[x][y] = new Montagne(x_init, y_init_2);
-                    // this.plateau_hexas[x][y].i_hexa = x;
-                    // this.plateau_hexas[x][y].j_hexa = y;
-                    // this.plateau_hexas[x][y].setEtat(0);
                     choix_type_hexa(this.plateau_hexas, x, y, x_init, y_init_2);
 				}
-
-
-
-                // if (x == 2 && (y == 6 || y == 5) ) {
-            	// 	this.tri_1[x][y] = new Colline(x_init, y_init);
-            	// 	this.tri_2[x][y] =  new Colline(x_init_2, y_init_2);
-            	// }else if (x == 4 &&(y == 2 || y == 3) ) {
-            	// 	this.tri_1[x][y] = new Village(x_init, y_init);
-            	// 	this.tri_2[x][y] =  new Village(x_init_2, y_init_2);
-            	// }else if (x == 6 && (y == 7 || y == 8)) {
-            	// 	this.tri_1[x][y] = new Montagne(x_init, y_init);
-            	// 	this.tri_2[x][y] =  new Montagne(x_init_2, y_init_2);
-            	// }else if ((x == 7 || x == 8) && (y == 4 || y == 5)) {
-            	// 	this.tri_1[x][y] = new Plaine(x_init, y_init);
-            	// 	this.tri_2[x][y] =  new Plaine(x_init_2, y_init_2);
-            	// }else {
-            	// 	this.tri_1[x][y] = new Foret(x_init, y_init);
-            	// 	this.tri_2[x][y] =  new Foret(x_init_2, y_init_2);
-            	// }
 
                 for (int j = 0; j < x_init.length; j++) {
                     x_init[j] += 50;
