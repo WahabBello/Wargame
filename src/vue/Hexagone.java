@@ -26,7 +26,6 @@ public abstract class Hexagone {
 		this.setBonus_defense(bonus_defense);
 		this.setCouleur(couleur);
 		this.setDessin_hexa(x,y);
-//		this.loadImages();
 		this.setEtat(0);
 	}  
 

@@ -49,7 +49,6 @@ public class Scenario{
 		this.nbMaxTours = nbMaxT;
 	}
 	
-    // getClass().getResource("/nom")
 	public void parametrer_depuis_fichier(String nom){
 		int i = 0;
 		int j = 0;

@@ -53,7 +53,6 @@ public class Actions_unite {
 							this.plateau.tri_hexa= true;
 							this.hexa_selected = this.plateau.plateau_hexas[i][j];
 						}
-//						System.out.println(this.hexa_selected.i_hexa+"<-i et j->"+this.hexa_selected.j_hexa);
                 	}
 		
         this.plateau.repaint();
@@ -65,9 +64,7 @@ public class Actions_unite {
 			if (hexa_choisi.unite.getPoint_vie_restant() >= 0 && (plateau_hexas.getEtat() != player_actif.getNumero_joueur())){
 				if (hexa_choisi.unite.Atteignable(hexa_choisi, plateau_hexas)){
 					hexa_choisi.unite.Attaque(hexa_choisi, plateau_hexas);
-					// System.out.println("hexa depart : degat causé =" + hexa_choisi.unite.getDegat());
 					plateau_hexas.unite.Niveau_Vie(plateau_hexas,hexa_choisi.unite.getDegat());
-					// System.out.println("hexa arrive : Point de vie =" + plateau_hexas.unite.getPoint_vie_restant());
 					if(plateau_hexas.unite.getPoint_vie_restant() <= 0){
 						plateau_hexas.unite = null;
 						plateau_hexas.setEtat(0);
