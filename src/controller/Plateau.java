@@ -32,21 +32,23 @@ public class Plateau{
     private void initPolygone() {
         for (int x = 0; x < this.plateau_hexas.length; x++) {
             for (int y = 0; y <  this.plateau_hexas.length; y++) {
-
-                if(y%2 == 0)
-				{
-					this.plateau_hexas[x][y] = new Colline(x_init,y_init);
-					this.plateau_hexas[x][y].i_hexa = x;
-                    this.plateau_hexas[x][y].j_hexa = y;
-                    this.plateau_hexas[x][y].setEtat(0);
+                if(y%2 == 0){
+					// this.plateau_hexas[x][y] = new Colline(x_init,y_init);
+					// this.plateau_hexas[x][y].i_hexa = x;
+                    // this.plateau_hexas[x][y].j_hexa = y;
+                    // this.plateau_hexas[x][y].setEtat(0);
+                    choix_type_hexa(this.plateau_hexas, x, y, x_init, y_init);
 				}
 				else
 				{
-                    this.plateau_hexas[x][y] = new Montagne(x_init, y_init_2);
-                    this.plateau_hexas[x][y].i_hexa = x;
-                    this.plateau_hexas[x][y].j_hexa = y;
-                    this.plateau_hexas[x][y].setEtat(0);
+                    // this.plateau_hexas[x][y] = new Montagne(x_init, y_init_2);
+                    // this.plateau_hexas[x][y].i_hexa = x;
+                    // this.plateau_hexas[x][y].j_hexa = y;
+                    // this.plateau_hexas[x][y].setEtat(0);
+                    choix_type_hexa(this.plateau_hexas, x, y, x_init, y_init_2);
 				}
+
+
 
                 // if (x == 2 && (y == 6 || y == 5) ) {
             	// 	this.tri_1[x][y] = new Colline(x_init, y_init);
@@ -86,5 +88,24 @@ public class Plateau{
                 y_init_2[j_x] += 60;
             }
         }        
+    }
+    
+    private void choix_type_hexa (Hexagone[][] plateau_hexas, int x, int y, int x_init[], int y_init[]) {
+        if ((y <= 3 && y >= 0) && (x >= 2 && x < 10) ) {
+            plateau_hexas[x][y] = new Village(x_init,y_init);
+            plateau_hexas[x][y].i_hexa = x;
+            plateau_hexas[x][y].j_hexa = y;
+            plateau_hexas[x][y].setEtat(0);
+        }else if (x >= 0 && x < 2 || x >= 10 && x < 12 ){
+            plateau_hexas[x][y] = new Foret(x_init,y_init);
+            plateau_hexas[x][y].i_hexa = x;
+            plateau_hexas[x][y].j_hexa = y;
+            plateau_hexas[x][y].setEtat(0);
+        }else {
+            plateau_hexas[x][y] = new Montagne(x_init, y_init);
+            plateau_hexas[x][y].i_hexa = x;
+            plateau_hexas[x][y].j_hexa = y;
+            plateau_hexas[x][y].setEtat(0);
+        }
     }
 }

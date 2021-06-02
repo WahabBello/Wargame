@@ -5,7 +5,7 @@ import vue.Hexagone;
 import java.awt.Polygon;
 import java.awt.TexturePaint;
 import java.awt.image.BufferedImage;
-import java.io.File;
+// import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +23,7 @@ public class Infanterie extends Unite {
     // Chargement de l'image
 	public TexturePaint loadImages(Polygon dimension) {
         try {
-        	BufferedImage slate  =  ImageIO.read(getClass().getResource("/Infanterie.png"));
+        	BufferedImage slate  =  ImageIO.read(getClass().getResource("/Infanterie1.png"));
             super.image_unite  = new TexturePaint(slate, dimension.getBounds());
         } catch (IOException ex) {
             Logger.getLogger(Hexagone.class.getName()).log(

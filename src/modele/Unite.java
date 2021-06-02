@@ -36,11 +36,10 @@ public abstract class Unite {
 
 	// Verifier la vision de deplacement d'une unité
 	public Boolean vision_v(Hexagone depart, Hexagone arrive) {
-		/*
-		 * distance entre le x final et le x de départ sera comparé à la vision d'une
+		/* distance entre le x final et le x de départ sera comparé à la vision d'une
 		 * unité si x_initial = x_final alors on modifie le y sinon (y_initiaal =
-		 * y_final) on modifie le x
-		 */
+		 * y_final) on modifie le x		 */
+
 		int Distance_X, Distance_Y;
 		Distance_X = arrive.j_hexa - depart.j_hexa;
 		Distance_Y = arrive.i_hexa - depart.i_hexa;
@@ -66,7 +65,7 @@ public abstract class Unite {
 		int y_distance;
 		x_distance = Math.abs(arrive.j_hexa - depart.j_hexa);
 		y_distance = Math.abs(arrive.i_hexa - depart.i_hexa);
-		if ((x_distance == 0 || x_distance == 1) && (y_distance == 1 || y_distance == 2)) {
+		if ((x_distance == 0 || x_distance == 1  || x_distance == 2) && (y_distance == 1 || y_distance == 2 || y_distance == 3)) {
 			return true;
 		} else {
 			return false;

@@ -58,9 +58,10 @@ public class Dessin_polygone extends JComponent {
                 }
             }
          }
+
          for (int x = 0; x < this.plateau_hexas.length; x++) {
              for (int y = 0; y <  this.plateau_hexas.length; y++) {
-                 g2d.setColor(Color.WHITE);
+                 g2d.setColor(this.plateau_hexas[x][y].getCouleur());
                  g2d.drawPolygon(this.plateau_hexas[x][y].getDessin_hexa());                 
                  
                  if (this.plateau_hexas[x][y].getEtat() != 0) {
@@ -82,6 +83,7 @@ public class Dessin_polygone extends JComponent {
 //                 }
              }
          }
+
     }
     
     private Color color_player(int numero){

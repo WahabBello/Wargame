@@ -52,6 +52,7 @@ public class Graphisme extends JFrame {
 	Plateau plateau;
 	Dessin_polygone dessin_poly;
 	JPopupMenu popupMenu_unite;
+	JPopupMenu popupMenu_menu;
 	Panel panel_1;
 	JLabel label_user;
 	ArrayList<Joueur> players;
@@ -131,14 +132,42 @@ public class Graphisme extends JFrame {
 		panel_1 = new Panel();
 		contentPane.add(panel_1, BorderLayout.NORTH);
 		
+		
 
 		FlowLayout fl_panel_1 = new FlowLayout(FlowLayout.LEFT, 5, 5);
 		panel_1.setLayout(fl_panel_1);
 		
 		JButton btnNewButton_1 = new JButton("Menu");
 		btnNewButton_1.setHorizontalAlignment(SwingConstants.LEFT);
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				showOptionsSave();
+			}
+		});
 		panel_1.add(btnNewButton_1);
-		
+
+	popupMenu_menu = new JPopupMenu();
+
+	JMenuItem item_reprise = new JMenuItem("Reprise de la partie");
+	item_reprise.setActionCommand("");
+	item_reprise.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			fonction_non_dispo();
+		}
+	});
+	popupMenu_menu.add(item_reprise);	
+
+	JMenuItem item_save = new JMenuItem("Sauvegarde de la partie");
+	item_save.setActionCommand("");
+	item_save.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			fonction_non_dispo();
+		}
+	});
+	popupMenu_menu.add(item_save);
+
+
+		// ---
 		JButton btnNewButton_3 = new JButton("Add Unit\u00E9");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -231,7 +260,7 @@ public class Graphisme extends JFrame {
 		
 		label_etat_hexa = new JLabel("INFORMATIONS DU JEU");
 		label_etat_hexa.setHorizontalAlignment(SwingConstants.CENTER);
-		label_etat_hexa.setPreferredSize(new Dimension(150, 16));
+		label_etat_hexa.setPreferredSize(new Dimension(160, 16));
 		label_etat_hexa.setFont(new Font("SansSerif", Font.BOLD, 13));
 		panel_2.add(label_etat_hexa);
 
@@ -322,6 +351,10 @@ public class Graphisme extends JFrame {
 	private void showOptionsUnites() {
     	 popupMenu_unite.show(panel_1, 60, 33);
 	}
+	
+	private void showOptionsSave() {
+    	 popupMenu_menu.show(panel_1, 20, 33);
+	}
 
 	// Methode pour ajouter une unitee
 	
@@ -337,6 +370,11 @@ public class Graphisme extends JFrame {
 		}else{
 			JOptionPane.showMessageDialog(this,"Selectionnner un hexagone d'abord");
 		}
+	}
+	// Methode pour les fonctionnalités non implementé
+	
+	private void fonction_non_dispo() {	
+		JOptionPane.showMessageDialog(this,"Fonctionnalté non disponible");
 	}
 
 	// Methode pour changer l'hexagone selectionner
