@@ -23,6 +23,23 @@ public abstract class Joueur {
 		numero++;
 		this.setNumero_joueur(numero);
 		this.add_joueur(this);
+		this.init_color_player(numero);
+
+	}
+
+	private void init_color_player(int numero){
+		if (numero == 1){
+			this.setColor(Color.BLUE);
+		}
+		else if (numero == 2){
+			this.setColor(Color.RED);
+		}
+		else if (numero == 3){
+			this.setColor(Color.CYAN);
+		}
+		else{
+			this.setColor(Color.GREEN);
+		}
 	}
 
 	public void add_joueur(Joueur element) {	

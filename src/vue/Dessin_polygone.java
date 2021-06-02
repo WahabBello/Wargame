@@ -14,6 +14,8 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 
+import modele.Joueur;
+
 // Initialisation des tableaux de polygone avec leurs differents couleurs
 public class Dessin_polygone extends JComponent {
 
@@ -23,6 +25,8 @@ public class Dessin_polygone extends JComponent {
     public int col;
     public boolean tri_hexa;
     public TexturePaint slate;
+	// public Joueur player_actif;
+
     
     public Dessin_polygone(Hexagone[][] tab, int row, int col, boolean tri_hexa){
         this.plateau_hexas = tab;
@@ -45,8 +49,13 @@ public class Dessin_polygone extends JComponent {
         
         if (this.row != -1) {          	
             if (this.tri_hexa) {
-               g2d.setColor(Color.WHITE);
-               g2d.fillPolygon(this.plateau_hexas[this.row][this.col].getDessin_hexa());            		
+                if(this.plateau_hexas[this.row][this.col].getEtat() != 0){
+                    g2d.setColor(color_player(this.plateau_hexas[this.row][this.col].getEtat()));
+                    g2d.fillPolygon(this.plateau_hexas[this.row][this.col].getDessin_hexa());            		
+                }else{
+                    g2d.setColor(Color.WHITE);
+                    g2d.fillPolygon(this.plateau_hexas[this.row][this.col].getDessin_hexa());            		
+                }
             }
          }
          for (int x = 0; x < this.plateau_hexas.length; x++) {
@@ -75,6 +84,22 @@ public class Dessin_polygone extends JComponent {
          }
     }
     
+    private Color color_player(int numero){
+		if (numero == 1){
+			return Color.BLUE;
+		}
+		else if (numero == 2){
+			return Color.RED;
+
+		}
+		else if (numero == 3){
+			return Color.CYAN;
+		}
+		else{
+			return Color.GREEN;
+		}
+	}
+
 //  Image affichee derriere des polygones
     private void loadImages() {
          try {        	 

@@ -229,17 +229,23 @@ public class Graphisme extends JFrame {
 		canvas.setBounds(new Rectangle(0, 0, 60, 60));
 		panel_2.add(canvas);
 		
+		label_etat_hexa = new JLabel("INFORMATIONS DU JEU");
+		label_etat_hexa.setHorizontalAlignment(SwingConstants.CENTER);
+		label_etat_hexa.setPreferredSize(new Dimension(150, 16));
+		label_etat_hexa.setFont(new Font("SansSerif", Font.BOLD, 13));
+		panel_2.add(label_etat_hexa);
+
 		label_etat_hexa = new JLabel("Etat Hexa : ??");
 		label_etat_hexa.setHorizontalAlignment(SwingConstants.CENTER);
 		label_etat_hexa.setPreferredSize(new Dimension(140, 16));
 		label_etat_hexa.setFont(new Font("SansSerif", Font.PLAIN, 14));
 		panel_2.add(label_etat_hexa);
 		
-		label_num_joueur = new JLabel("Joueur : ??");
-		label_num_joueur.setHorizontalAlignment(SwingConstants.CENTER);
-		label_num_joueur.setPreferredSize(new Dimension(140, 16));
-		label_num_joueur.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		panel_2.add(label_num_joueur);
+		// label_num_joueur = new JLabel("Joueur : ??");
+		// label_num_joueur.setHorizontalAlignment(SwingConstants.CENTER);
+		// label_num_joueur.setPreferredSize(new Dimension(140, 16));
+		// label_num_joueur.setFont(new Font("SansSerif", Font.PLAIN, 14));
+		// panel_2.add(label_num_joueur);
 		
 		label_unite = new JLabel("Unit\u00E9 : Cavalerie");
 		label_unite.setHorizontalAlignment(SwingConstants.CENTER);
@@ -376,7 +382,7 @@ public class Graphisme extends JFrame {
 	public void update_infos() {
 		if(this.hexa_selected != null ) {
 			if(this.hexa_selected.getEtat() != 0 ) {
-				label_num_joueur.setText("Joueur : " + this.player_actif.getNumero_joueur());
+				// label_num_joueur.setText("Joueur : " + this.player_actif.getNumero_joueur());
 				label_etat_hexa.setText("Etat Hexa : " + this.hexa_selected.getEtat());
 				label_unite.setText("Unit\u00E9 : " + this.hexa_selected.unite.getNom());
 				label_unite_pa.setText("P. A : "+ this.hexa_selected.unite.getPoint_Attaque());

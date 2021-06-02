@@ -11,16 +11,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
-    //Classe fille de chaque unité
+//Classe fille de chaque unité
 
 public class Infanterie_Lourde extends Unite {
 
 	public Infanterie_Lourde() {
 		super("Infanterie Lourde", 10, 10, 4, 4, 38);		
 	}
-
     
-    // chargement de l'image
+    // Chargement de l'image
+
 	public TexturePaint loadImages(Polygon dimension) {
         try {
         	BufferedImage slate = ImageIO.read(getClass().getResource("/Infanterie_Lourde.png"));
