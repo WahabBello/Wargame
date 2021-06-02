@@ -61,28 +61,17 @@ public class Actions_unite {
 
     // Methode private pour verifier les conditions d'attaque et effectuer l'effectuer si possible
 	private void attaquer(Hexagone hexa_choisi, Joueur player_actif, Dessin_polygone dessin_poly, Hexagone plateau_hexas) {
-
 		if(hexa_choisi.getEtat() != 0 && plateau_hexas.getEtat() != 0){
 			if (hexa_choisi.unite.getPoint_vie_restant() >= 0 && (plateau_hexas.getEtat() != player_actif.getNumero_joueur())){
-			// if (hexa_choisi.getEtat() != player_actif.getNumero_joueur()){
-				// if (hexa_choisi.unite.vision_v(hexa_choisi, plateau_hexas)){
 				if (hexa_choisi.unite.Atteignable(hexa_choisi, plateau_hexas)){
 					hexa_choisi.unite.Attaque(hexa_choisi, plateau_hexas);
-					System.out.println("hexa depart : degat causé =" + hexa_choisi.unite.getDegat());
-					
+					// System.out.println("hexa depart : degat causé =" + hexa_choisi.unite.getDegat());
 					plateau_hexas.unite.Niveau_Vie(plateau_hexas,hexa_choisi.unite.getDegat());
-					// hexa_choisi.unite.Attaque(hexa_choisi, plateau_hexas);
-					System.out.println("hexa arrive : Point de vie =" + plateau_hexas.unite.getPoint_vie_restant());
-
+					// System.out.println("hexa arrive : Point de vie =" + plateau_hexas.unite.getPoint_vie_restant());
 					if(plateau_hexas.unite.getPoint_vie_restant() <= 0){
 						plateau_hexas.unite = null;
 						plateau_hexas.setEtat(0);
 					}
-					// plateau_hexas.unite = hexa_choisi.unite;
-					// plateau_hexas.setEtat(player_actif.getNumero_joueur());
-					// hexa_choisi.unite = null;
-					// hexa_choisi.setEtat(0);
-
 				}else {
 					JOptionPane.showMessageDialog(dessin_poly, "Vous n'etes pas assez proche pour attaquer");
 				}
@@ -92,22 +81,19 @@ public class Actions_unite {
 		}else {
 			JOptionPane.showMessageDialog(dessin_poly, "Selectionner une unite a attaquer");
 		}
-	
 	}
 
     // Methode private pour verifier les conditions de deplacement et effectuer l'effectuer si possible
 	private void deplacer(Hexagone hexa_choisi, Joueur player_actif, Dessin_polygone dessin_poly, Hexagone plateau_hexas) {
 
 		if (hexa_choisi.getEtat() != 0 && plateau_hexas.getEtat() == 0){
-			if (hexa_choisi.unite.getPoint_Deplacement_Restant() >= 0 && (hexa_choisi.unite.getPoint_Deplacement_Restant() >= plateau_hexas.getPoint_deplacements())) {
+			if (hexa_choisi.unite.getPoint_Deplacement_Restant() >= 0 && (hexa_choisi.unite.getPoint_Deplacement_Restant() >= plateau_hexas.getPoint_deplacements())){
 				if (hexa_choisi.unite.vision_v(hexa_choisi, plateau_hexas)){
-					
 					hexa_choisi.unite.se_deplace(hexa_choisi, plateau_hexas);
 					System.out.println(plateau_hexas.unite.getPoint_Deplacement_Restant());
 					plateau_hexas.setEtat(player_actif.getNumero_joueur());
 					hexa_choisi.unite = null;
 					hexa_choisi.setEtat(0);
-					
 				}else {
 					JOptionPane.showMessageDialog(dessin_poly, "Vision non respecte");
 				}
